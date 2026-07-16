@@ -32,3 +32,8 @@ export class AuthController {
     return this.authService.remove(+id);
   }
 }
+
+// login
+// gerar JWT
+// validar senha
+// refresh token

@@ -4,6 +4,7 @@ CREATE TABLE users (
     nome TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     senha TEXT NOT NULL,
+    sexo TEXT NOT NULL,
     role TEXT NOT NULL
 );
 
