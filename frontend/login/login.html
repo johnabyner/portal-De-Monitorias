@@ -22,7 +22,12 @@
     </div>
 
 
-    <form action="login.html" method="post" class="formulario-login">
+        <form 
+            action="login.html" 
+            method="post" 
+            class="formulario-login"
+            novalidate
+        >
 
 
         <div class="title-formulario">
@@ -41,6 +46,7 @@
                 autocomplete="email"
                 required
             >
+            <span class="mensagem-erro"></span>
         </div>
 
 
@@ -52,8 +58,10 @@
                 id="senha"
                 name="senha"
                 placeholder="Digite sua senha"
+                minlength="8"
                 required
             >
+            <span class="mensagem-erro"></span>
         </div>
 
 
@@ -70,6 +78,8 @@
 
     </form>
 
+
+    <script src="../js/validacao.js"></script>
 
 </body>
 </html>
