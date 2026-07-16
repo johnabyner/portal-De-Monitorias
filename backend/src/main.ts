@@ -29,7 +29,7 @@ async function bootstrap() {
       }),
     );
 
-    await app.listen(process.env.PORT ?? 3000);
+    await app.listen(process.env.PORT ?? 7777);
   }catch(err){
     console.error('Erro ao iniciar a aplicação', err)
   }

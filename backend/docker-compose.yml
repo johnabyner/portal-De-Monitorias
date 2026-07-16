@@ -1,13 +1,13 @@
 services:
   db:
-    image: postgres:16
+    image: postgres:18
     container_name: postgresqlContainer
     environment:
-      POSTGRES_USER: monitoriaIFRJ
-      POSTGRES_PASSWORD: monitoria67
-      POSTGRES_DB: monitoriasDB
+      POSTGRES_USER: ${DOCKER_USER}
+      POSTGRES_PASSWORD: ${DOCKER_PASSWORD}
+      POSTGRES_DB: ${DOCKER_DB}
     ports:
-      - "6666:5432"
+      - "${DOCKER_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

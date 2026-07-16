@@ -1,3 +1,5 @@
+//nao se esqueça do .env
+
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Pool } from 'pg';
 
@@ -9,11 +11,7 @@ export class DatabaseService implements OnModuleInit {
     async onModuleInit() { //quando o módulo termina de ser inicializado.
         try{
             this.pool = new Pool({
-                host: 'localhost',
-                port: 6666,
-                user: 'monitoriaIFRJ',
-                password: 'monitoria67',
-                database: 'monitoriasDB',
+                connectionString: process.env.DATABASE_URL,
             });
 
             await this.pool.query('SELECT 1'); //serve apenas para verificar se o banco realmente está acessível.
