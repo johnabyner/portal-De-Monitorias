@@ -8,7 +8,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {} //esta chamando os services
 
   @HttpCode(201)
-  @Post('singup') 
+  @Post('signup') 
   createUser(@Body() createUserDto: CreateUserDto) { //vai passar por parametro o body da requisição no formato dto
     return this.usersService.createUser(createUserDto);
   }
