@@ -152,7 +152,7 @@ formulario.addEventListener("submit", async function(event) {
 
 
         const resposta = await fetch(
-            "http://localhost:3000/users/signup",
+            "http://localhost:7777/users/signup",
             {
 
                 method: "POST",
@@ -181,11 +181,7 @@ formulario.addEventListener("submit", async function(event) {
 
         }
 
-
-
         console.log("Usuário cadastrado:", dados);
-
-
         formulario.reset();
 
 
@@ -194,19 +190,11 @@ formulario.addEventListener("submit", async function(event) {
             campo.classList.remove("valido");
 
         });
-
-
-
+        
     } catch (erro) {
-
-
         console.error(
             "Erro no cadastro:",
             erro
         );
-
-
     }
-
-
 });

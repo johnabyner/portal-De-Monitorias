@@ -1,12 +1,12 @@
 ## signup
-POST http://localhost:3000/users/signup
+POST http://localhost:7777/users/signup
 Content-Type: application/json
 
 {
-    "matricula": 20256702,
-    "nome": "john",
-    "email": "john@gmail.com",
-    "sexo": "masculino",
+    "matricula": 202567,
+    "nome": "soṕh",
+    "email": "sophia@gmail.com",
+    "sexo": "feminino",
     "senha": "123456"
 }
 
