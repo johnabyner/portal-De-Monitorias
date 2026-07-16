@@ -1,0 +1,119 @@
+.login {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+
+/* Título principal */
+#titleLogin {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+#titleLogin h1 {
+  font-size: 64px;
+  margin: 0;
+}
+
+
+/* Caixa do formulário */
+.formulario-login {
+  width: 100%;
+  max-width: 450px;
+  padding: 52px;
+  border-radius: 12px;
+  border: 1px solid #FEE7D6;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  margin-top: 60px;
+}
+
+
+/* Título Login dentro da caixa */
+.title-formulario h2 {
+  text-align: center;
+  font-size: 32px;
+  margin: 0 0 30px;
+}
+
+
+/* Campos */
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+
+.campo input[type="email"],
+.campo input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  outline: none;
+}
+
+
+.campo input:focus {
+  border-color: #C98F68;
+  box-shadow: 0 0 0 3px rgba(201, 143, 104, 0.18);
+}
+
+
+/* Botão */
+button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background-color: #A66F4F;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+button:hover {
+  background-color: #89583D;
+}
+
+
+/* Link para cadastro */
+.cadastro-link {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+.cadastro-link span {
+  color: #666666;
+}
+
+
+.cadastro-link a {
+  margin-left: 5px;
+  color: #A66F4F;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+.cadastro-link a:hover {
+  text-decoration: underline;
+  color: #89583D;
+}

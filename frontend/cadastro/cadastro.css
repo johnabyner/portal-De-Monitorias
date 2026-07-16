@@ -1,0 +1,121 @@
+.cadastro {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+#titleCadastro {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+#titleCadastro h1 {
+  font-size: 64px;
+  margin: 0;
+}
+
+.formulario-cadastro {
+  width: 100%;
+  max-width: 450px;
+  padding: 52px;
+  border-radius: 12px;
+  border: 1px solid #FEE7D6;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-top: 100px;
+}
+
+.title-formulario h2 {
+  text-align: center;
+  font-size: 32px;
+  margin: 0 0 30px;
+}
+
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo label,
+.campo legend {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  outline: none;
+}
+
+.campo input:focus {
+  border-color: #C98F68;
+  box-shadow: 0 0 0 3px rgba(201, 143, 104, 0.18);
+}
+
+fieldset.campo {
+  padding: 0;
+  border: none;
+}
+
+.opcoes-sexo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.opcoes-sexo label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background-color: #A66F4F;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #89583D;
+}
+
+.login-link {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.login-link span {
+  color: #666666;
+}
+
+.login-link a {
+  margin-left: 5px;
+  color: #A66F4F;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+  color: #89583D;
+}
