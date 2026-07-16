@@ -7,6 +7,7 @@
   padding: 24px;
 }
 
+
 #titleCadastro {
   position: absolute;
   top: 30px;
@@ -14,10 +15,12 @@
   text-align: center;
 }
 
+
 #titleCadastro h1 {
   font-size: 64px;
   margin: 0;
 }
+
 
 .formulario-cadastro {
   width: 100%;
@@ -25,9 +28,10 @@
   padding: 52px;
   border-radius: 12px;
   border: 1px solid #FEE7D6;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   margin-top: 100px;
 }
+
 
 .title-formulario h2 {
   text-align: center;
@@ -35,9 +39,11 @@
   margin: 0 0 30px;
 }
 
+
 .campo {
   margin-bottom: 18px;
 }
+
 
 .campo label,
 .campo legend {
@@ -46,76 +52,180 @@
   font-weight: bold;
 }
 
+
 .campo input[type="text"],
 .campo input[type="email"],
 .campo input[type="password"] {
+
   width: 100%;
   padding: 12px;
   font-size: 16px;
+
   border: 1px solid #CCCCCC;
   border-radius: 8px;
+
   outline: none;
 }
 
+
 .campo input:focus {
-  border-color: #C98F68;
-  box-shadow: 0 0 0 3px rgba(201, 143, 104, 0.18);
+  outline: none;
 }
+
+
+.campo input.invalido:focus {
+  border-color: #E67E22;
+}
+
+
+.campo input.valido:focus {
+  border-color: #2ECC71;
+}
+
+
+/* Campo preenchido incorretamente */
+.campo input.invalido {
+
+    border-color: #E67E22;
+
+}
+
+
+/* Erro após submit */
+.campo.erro input {
+
+    border-color: #E74C3C;
+
+    box-shadow:
+    0 0 0 3px rgba(231,76,60,0.15);
+
+}
+
+
+.campo input.valido {
+    border: 2px solid #2ECC71 !important;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+}
+
+
+/* Mensagem */
+.mensagem-erro {
+
+    display: none;
+
+    margin-top: 6px;
+
+    color: #E74C3C;
+
+    font-size: 13px;
+
+}
+
+
+.campo.erro .mensagem-erro {
+
+    display: block;
+
+}
+
+
 
 fieldset.campo {
-  padding: 0;
-  border: none;
+
+    padding: 0;
+    border: none;
+
 }
+
 
 .opcoes-sexo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
 }
+
 
 .opcoes-sexo label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  font-weight: normal;
-  cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    font-weight: normal;
+    cursor: pointer;
+
 }
+
+
 
 button {
+
   width: 100%;
+
   padding: 13px;
+
   border: none;
+
   border-radius: 8px;
+
   background-color: #A66F4F;
+
   color: #FFFFFF;
+
   font-size: 16px;
+
   font-weight: bold;
+
   cursor: pointer;
+
 }
+
 
 button:hover {
+
   background-color: #89583D;
+
 }
+
+
 
 .login-link {
+
   margin-top: 20px;
+
   text-align: center;
+
   font-size: 14px;
+
 }
+
 
 .login-link span {
+
   color: #666666;
+
 }
+
 
 .login-link a {
+
   margin-left: 5px;
+
   color: #A66F4F;
+
   text-decoration: none;
+
   font-weight: bold;
+
 }
 
+
 .login-link a:hover {
+
   text-decoration: underline;
+
   color: #89583D;
+
 }

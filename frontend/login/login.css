@@ -117,3 +117,49 @@ button:hover {
   text-decoration: underline;
   color: #89583D;
 }
+
+/* Campo preenchido incorretamente */
+.campo input.invalido {
+    border-color: #E67E22;
+}
+
+
+/* Erro após tentativa de envio */
+.campo.erro input {
+    border-color: #E74C3C;
+
+    box-shadow:
+    0 0 0 3px rgba(231,76,60,0.15);
+}
+
+
+/* Campo válido */
+.campo input.valido {
+
+    border: 2px solid #2ECC71;
+
+    box-shadow:
+    0 0 0 3px rgba(46,204,113,0.15);
+
+}
+
+
+/* Mensagem de erro */
+.mensagem-erro {
+
+    display: none;
+
+    margin-top: 6px;
+
+    color: #E74C3C;
+
+    font-size: 13px;
+
+}
+
+
+.campo.erro .mensagem-erro {
+
+    display: block;
+
+}

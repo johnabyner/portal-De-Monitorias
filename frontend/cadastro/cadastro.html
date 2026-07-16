@@ -21,7 +21,12 @@
     </div>
 
 
-    <form action="cadastro.html" method="post" class="formulario-cadastro">
+    <form 
+        action="cadastro.html" 
+        method="post" 
+        class="formulario-cadastro"
+        novalidate
+    >
 
         <div class="title-formulario">
             <h2>Cadastro</h2>
@@ -41,6 +46,8 @@
                 inputmode="numeric"
                 required
             >
+
+            <span class="mensagem-erro"></span>
         </div>
 
 
@@ -57,6 +64,8 @@
                 autocomplete="name"
                 required
             >
+
+            <span class="mensagem-erro"></span>
         </div>
 
 
@@ -71,10 +80,13 @@
                 autocomplete="email"
                 required
             >
+
+            <span class="mensagem-erro"></span>
         </div>
 
 
         <fieldset class="campo">
+
             <legend>Sexo</legend>
 
             <div class="opcoes-sexo">
@@ -110,6 +122,9 @@
                 </label>
 
             </div>
+
+            <span class="mensagem-erro"></span>
+
         </fieldset>
 
 
@@ -125,6 +140,8 @@
                 minlength="8"
                 required
             >
+
+            <span class="mensagem-erro"></span>
         </div>
 
 
@@ -132,13 +149,17 @@
             Cadastrar
         </button>
 
-        
+
         <div class="login-link">
             <span>Já tem uma conta?</span>
             <a href="../login/login.html">Faça login</a>
         </div>
-    
+
+
     </form>
+
+
+    <script src="../js/validacao.js"></script>
 
 </body>
 </html>
