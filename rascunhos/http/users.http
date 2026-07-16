@@ -1,0 +1,19 @@
+## signup
+POST http://localhost:3000/users/signup
+Content-Type: application/json
+
+{
+    "matricula": 20256702,
+    "nome": "john",
+    "email": "john@gmail.com",
+    "sexo": "masculino",
+    "senha": "123456"
+}
+
+## findalll
+
+## finduser
+
+## edit
+
+##delete
