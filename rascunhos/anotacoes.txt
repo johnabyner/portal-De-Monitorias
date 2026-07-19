@@ -14,13 +14,6 @@
 //atendimentos
 //favoritos
 
-auth
-POST /register
-POST /login
-POST /logout
-GET /profile
-get /refresh
-
 CRUD
 Criar
 Editar
