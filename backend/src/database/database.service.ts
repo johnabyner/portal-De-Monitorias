@@ -26,6 +26,7 @@ export class DatabaseService implements OnModuleInit {
             return await this.pool.query(text, params);
         }catch(err){
             console.error('Erro ao fazer a consulta ao BD', err)
+            throw err;
         }
     }
 }
