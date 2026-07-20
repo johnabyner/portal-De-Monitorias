@@ -11,8 +11,8 @@ export class UsersRepository {
         const result = await this.db.query(
             `
             INSERT INTO users
-            (matricula, nome, email, senha, sexo, role)
-            VALUES ($1,$2,$3,$4,$5,$6)
+            (matricula, nome, email, senha, sexo, role, refreshtoken)
+            VALUES ($1,$2,$3,$4,$5,$6, $7);
             `,
             [
                 user.matricula,
@@ -21,14 +21,15 @@ export class UsersRepository {
                 user.senha,
                 user.sexo,
                 user.role,
+                user.refreshtoken
             ],
         );
-        return result.row[0];
+        return result.rows[0];
     }
     //achar a martricula
     async findByRegistration(matricula: string) {
         const result = await this.db.query(
-            `SELECT * FROM users WHERE matricula = $1`,
+            `SELECT * FROM users WHERE matricula = $1;`,
             [matricula],
         );
 
@@ -37,7 +38,7 @@ export class UsersRepository {
     //achar todos
     async findAllUsers(page: number,limit: number){
         const result = await this.db.query(
-            `SELECT * FROM users LIMIT $1 OFFSET $2;`,
+            `SELECT * FROM users OFFSET $1 LIMIT $2 ;`,
             [
                 page,limit
             ]
@@ -48,13 +49,13 @@ export class UsersRepository {
     //achar um usuario em especifico
     async findUser(name: string,page: number,limit: number){
         const result = await this.db.query(
-            `SELECT * FROM users WHERE name LIKE %$1% LIMIT $2 OFFSET $3;`,
+            `SELECT * FROM users WHERE nome LIKE $1  OFFSET $2 LIMIT $3;`,
             [
-                name,page,limit
+                `%${name}%`,page,limit
             ]
         )
         
-        return result.rows
+        return result.rows;
     }
 
     async updateUser(user: UpdateUserDto, matricula: string){
@@ -77,7 +78,7 @@ export class UsersRepository {
                 matricula
             ]
         )
-        return result.rows;
+        return result.rows[0];
     }
 
     async deleteUser(matricula: string){

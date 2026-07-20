@@ -13,7 +13,7 @@ export class UsersController {
   }
 
   @Get()
-  findAllUser(@Query('name') name: string, @Query('page') page = 1, @Query('limit') limit = 20){
+  findAllUser(@Query('name') name: string, @Query('page') page = 0, @Query('limit') limit = 20){
     //se tiver na query um nome, vai proucurar por esse usuario em especifico
     if(name){
       return this.usersService.findUser(name, Number(page), Number(limit));

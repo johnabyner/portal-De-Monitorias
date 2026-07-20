@@ -1,0 +1,30 @@
+@backend_dev = http://localhost:7777
+
+### signup
+POST {{backend_dev}}/users/signup
+Content-Type: application/json
+
+{
+    "matricula": 202544,
+    "nome": "john",
+    "email": "john@gmail.com",
+    "sexo": "masculino",
+    "senha": "123456"
+}
+
+### findall
+GET {{backend_dev}}/users
+
+### finduser
+GET {{backend_dev}}/users?name=alex
+
+### edit
+PATCH {{backend_dev}}/users/202544
+Content-Type: application/json
+
+{
+    "nome": "cleiton"
+}
+
+### delete
+DELETE {{backend_dev}}/users/202544
