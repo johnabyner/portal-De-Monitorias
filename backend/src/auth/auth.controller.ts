@@ -20,7 +20,6 @@ export class AuthController {
 }
 
 // login
-// gerar JWT
 // validar senha
 
 // refresh token
