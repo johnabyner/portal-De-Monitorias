@@ -93,4 +93,20 @@ export class UsersRepository {
         )
         return result.rows[0];
     }
+
+    async updateRefreshToken(matricula: string, refreshToken: string){
+        const result = await this.db.query(
+            `
+                UPDATE users
+                SET
+                    refreshtoken = $1
+                WHERE matricula = $2;
+            `,
+            [
+                refreshToken,
+                matricula
+            ]
+        )
+        return result.rows[0]
+    }
 }

@@ -25,7 +25,6 @@ export class CreateUserDto {
     @IsString()
     @MinLength(5)
     @IsNotEmpty()
-    @Transform(({ value }) => String(value).trim())
     readonly senha!: string
 }
 
