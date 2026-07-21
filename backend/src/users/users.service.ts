@@ -3,13 +3,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
 import { createHash } from 'crypto';
-import { JwtService } from '@nestjs/jwt';
+
 import { UserResponseDto } from './dto/response-user.dto';
 import { plainToInstance } from 'class-transformer';
+import { jwtAuthService } from '../auth/JwtAuth.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: UsersRepository, private jwtService: JwtService){}
+  constructor(private readonly usersRepository: UsersRepository, private readonly jwtService: jwtAuthService){}
 
   //criar usuario
   async createUser(createUserDto: CreateUserDto) {
@@ -25,10 +26,9 @@ export class UsersService {
       hash.update(createUserDto.senha); //vai atualizar a variavel hash, hasheando a senha
       const hashedPassword = hash.digest('hex');
 
-      //JWT
       const payload = {sub: createUserDto.matricula};
-      const acessToken = await this.jwtService.signAsync(payload, {expiresIn: '15m',  secret: process.env.JWT_SECRET}); //tempo para ver os horarios
-      const refreshtoken = await this.jwtService.signAsync(payload, {expiresIn: '7d', secret: process.env.JWT_SECRET}) //tempo para por exemplo em uma semana de provas nao ter q logar dnv
+      const acessToken =  await this.jwtService.createAcessToken(payload);
+      const refreshToken = await this.jwtService.createRefreshToken(payload);
 
       const user = {
         matricula: createUserDto.matricula,
@@ -37,11 +37,11 @@ export class UsersService {
         senha: hashedPassword,
         sexo: createUserDto.sexo,
         role: 'aluno', //futuramente podera verificar pela matricula qual cargo o user tem
-        refreshtoken: refreshtoken
+        refreshtoken: refreshToken
       };
       const result = await this.usersRepository.create(user); //vai mandar pro repository com os parametros sanitizados pelo DTO
 
-      return {message: 'usuario criado com sucesso',acessToken, refreshtoken,result: result};
+      return {message: 'usuario criado com sucesso',acessToken, refreshToken,result: result};
   }
 
 
