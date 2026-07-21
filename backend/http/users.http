@@ -1,11 +1,12 @@
-@backend_dev = http://localhost:7777
+@BACKEND_URL=http://localhost:7777
+@ADM_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDI1MDAiLCJpYXQiOjE3ODQ1OTU0OTMsImV4cCI6MTc4NDU5NjM5M30.GiowcOR_GAbTQyKor9NQZKW4Ja2AbScpIb7NYXGx90I
 
 ### signup
-POST {{backend_dev}}/users/signup
+POST {{BACKEND_URL}}/users/signup
 Content-Type: application/json
 
 {
-    "matricula": 202544,
+    "matricula": 202500,
     "nome": "john",
     "email": "john@gmail.com",
     "sexo": "masculino",
@@ -13,18 +14,22 @@ Content-Type: application/json
 }
 
 ### findall
-GET {{backend_dev}}/users
+GET {{BACKEND_URL}}/users
+Authorization: Bearer {{ADM_TOKEN}}
 
 ### finduser
-GET {{backend_dev}}/users?name=alex
+GET {{BACKEND_URL}}/users?name=alex
+Authorization: Bearer {{ADM_TOKEN}}
 
 ### edit
-PATCH {{backend_dev}}/users/202544
+PATCH {{BACKEND_URL}}/users/202500
+Authorization: Bearer {{ADM_TOKEN}}
 Content-Type: application/json
 
 {
-    "nome": "cleiton"
+    "nome": "john abyner"
 }
 
 ### delete
-DELETE {{backend_dev}}/users/202544
+DELETE {{BACKEND_URL}}/users/202500
+Authorization: Bearer {{ADM_TOKEN}}
