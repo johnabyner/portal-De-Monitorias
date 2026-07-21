@@ -5,7 +5,8 @@ CREATE TABLE users (
     email TEXT UNIQUE NOT NULL,
     senha TEXT NOT NULL,
     sexo TEXT NOT NULL,
-    role TEXT NOT NULL
+    role TEXT NOT NULL,
+    refreshtoken TEXT
 );
 
 CREATE TABLE disciplinas (
@@ -47,6 +48,5 @@ CREATE TABLE horarios (
     hora_inicio TIME NOT NULL,
     hora_fim TIME NOT NULL,
 
-    FOREIGN KEY (monitoria_id)
-        REFERENCES monitorias(id)
+    FOREIGN KEY (monitoria_id) REFERENCES monitorias(id)
 );

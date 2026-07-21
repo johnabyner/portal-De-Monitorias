@@ -1,22 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { loginAuthDto } from './dto/loginAuthDto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { LoginAuthDto } from './dto/login-auth.Dto';
+import type { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-//   @Post()
-//   login(@Body() loginAuthDto: loginAuthDto) {
-//     //return this.authService.login(loginAuthDto);
-//   }
+  @Post()
+  login(@Body() loginAuthDto: LoginAuthDto) {
+    return this.authService.login(loginAuthDto);
+  }
 
 
-//   @Get() 
-//   refresh() {
-//     //return this.authService.findAll();
-//   }
+  @Get('refreshToken') 
+  refreshToken(@Req() request: Request) {
+    return this.authService.refreshToken(request);
+  }
 }
 
 // login

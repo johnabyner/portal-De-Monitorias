@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { createHash } from "crypto";
 import { Request } from 'express';
 
 
@@ -13,6 +14,7 @@ export class jwtAuthService{
     }
     async createRefreshToken(payload){
       const refreshtoken = await this.jwtService.signAsync(payload, {expiresIn: '7d', secret:process.env.JWT_REFRESH_SECRET}) //tempo para por exemplo em uma semana de provas nao ter q logar dnv
+    
       return refreshtoken;
     }
 

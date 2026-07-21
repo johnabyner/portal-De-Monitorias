@@ -8,10 +8,10 @@ import { DatabaseService } from '../database/database.service';
 
 @Module({
   imports: [
-    JwtModule.register({})
+    JwtModule.register({}), 
   ],
   controllers: [AuthController],
-  providers: [AuthService,DatabaseService, jwtAuthService],
+  providers: [AuthService,DatabaseService, jwtAuthService,UsersRepository],
   exports: [jwtAuthService],
 })
 export class AuthModule {}
