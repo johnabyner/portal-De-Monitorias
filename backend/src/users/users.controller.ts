@@ -18,12 +18,12 @@ export class UsersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('professor')
   @Get()
-  findAllUser(@Query('name') name: string, @Query('page') page = 0, @Query('limit') limit = 20){
+  findAllUser(@Query('name') name: string, @Query('page') page = 0){
     //se tiver na query um nome, vai proucurar por esse usuario em especifico
     if(name){
-      return this.usersService.findUser(name, Number(page), Number(limit));
+      return this.usersService.findUser(name, Number(page));
     }
-    return this.usersService.findAllUsers(Number(page), Number(limit));
+    return this.usersService.findAllUsers(Number(page));
   } 
 
   @UseGuards(JwtAuthGuard)

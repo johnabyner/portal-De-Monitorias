@@ -36,22 +36,22 @@ export class UsersRepository {
         return result.rows[0];
     }
     //achar todos
-    async findAllUsers(page: number,limit: number){
+    async findAllUsers(page: number){
         const result = await this.db.query(
-            `SELECT * FROM users OFFSET $1 LIMIT $2 ;`,
+            `SELECT * FROM users OFFSET $1 LIMIT = 20 ;`,
             [
-                page,limit
+                page
             ]
         );
 
         return result.rows;
     }
     //achar um usuario em especifico
-    async findUser(name: string,page: number,limit: number){
+    async findUser(name: string,page: number){
         const result = await this.db.query(
-            `SELECT * FROM users WHERE nome LIKE $1  OFFSET $2 LIMIT $3;`,
+            `SELECT * FROM users WHERE nome LIKE $1  OFFSET $2 LIMIT = 20;`,
             [
-                `%${name}%`,page,limit
+                `%${name}%`,page
             ]
         )
         

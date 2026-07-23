@@ -11,9 +11,10 @@ CREATE TABLE users (
 
 CREATE TABLE disciplinas (
     id SERIAL PRIMARY KEY,
-    nome TEXT NOT NULL,
+    professor_matricula TEXT ,
     curso TEXT NOT NULL,
-    descricao TEXT NOT NULL
+    descricao TEXT NOT NULL,
+    FOREIGN KEY (professor_matricula) REFERENCES users(matricula)
 );
 
 CREATE TABLE monitorias (

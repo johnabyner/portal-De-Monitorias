@@ -46,16 +46,16 @@ export class UsersService {
 
 
   //encontrar todos os usuarios
-  async findAllUsers(page,limit){
-    const result = await this.usersRepository.findAllUsers(page,limit);
+  async findAllUsers(page){
+    const result = await this.usersRepository.findAllUsers(page);
 
     //excludeExtraneousValues: true faz com que somente os campos marcados com @Expose() sejam retornados.
     const sanatizedResult =  plainToInstance(UserResponseDto, result, {excludeExtraneousValues: true})
     return {message: 'usuarios encontrados com sucesso', result: sanatizedResult};
   }
   //buscar um usuario em especifico
-  async findUser(name, page, limit){
-    const result = await this.usersRepository.findUser(name, page, limit);
+  async findUser(name, page){
+    const result = await this.usersRepository.findUser(name, page);
 
     const sanatizedResult =  plainToInstance(UserResponseDto, result, {excludeExtraneousValues: true})
     return {message: 'usuario encontrado com sucesso', result: result};
