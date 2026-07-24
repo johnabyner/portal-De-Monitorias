@@ -29,7 +29,6 @@ export class RolesGuard implements CanActivate {
     }
 
     const request = context.switchToHttp().getRequest(); //pega o req
-
     const payload = request.user; 
 
     const user = await this.usersRepository.findByRegistration(

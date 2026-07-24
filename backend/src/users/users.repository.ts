@@ -7,7 +7,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 export class UsersRepository {
     constructor(private readonly db: DatabaseService) {}
     //criar um usuario
-    async create(user) {
+    async createUser(user) {
         const result = await this.db.query(
             `
             INSERT INTO users
@@ -38,7 +38,7 @@ export class UsersRepository {
     //achar todos
     async findAllUsers(page: number){
         const result = await this.db.query(
-            `SELECT * FROM users OFFSET $1 LIMIT = 20 ;`,
+            `SELECT * FROM users OFFSET $1 LIMIT 20 ;`,
             [
                 page
             ]
@@ -49,7 +49,7 @@ export class UsersRepository {
     //achar um usuario em especifico
     async findUser(name: string,page: number){
         const result = await this.db.query(
-            `SELECT * FROM users WHERE nome LIKE $1  OFFSET $2 LIMIT = 20;`,
+            `SELECT * FROM users WHERE nome ILIKE $1  OFFSET $2 LIMIT 20;`,
             [
                 `%${name}%`,page
             ]

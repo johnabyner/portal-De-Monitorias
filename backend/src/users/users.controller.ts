@@ -16,7 +16,7 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('professor')
+  @Roles('professor','administrador')
   @Get()
   findAllUser(@Query('name') name: string, @Query('page') page = 0){
     //se tiver na query um nome, vai proucurar por esse usuario em especifico
@@ -32,7 +32,7 @@ export class UsersController {
     return this.usersService.updateUser(matricula,updateUserDto);
   }
   
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @HttpCode(204)
   @Delete(':matricula')
   deleteUser(@Param('matricula') matricula: string) {

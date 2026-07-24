@@ -39,7 +39,7 @@ export class UsersService {
         role: 'aluno', //futuramente podera verificar pela matricula qual cargo o user tem
         refreshtoken: refreshToken
       };
-      const result = await this.usersRepository.create(user); //vai mandar pro repository com os parametros sanitizados pelo DTO
+      const result = await this.usersRepository.createUser(user); //vai mandar pro repository com os parametros sanitizados pelo DTO
 
       return {message: 'usuario criado com sucesso',acessToken, refreshToken,result: result};
   }
@@ -58,7 +58,7 @@ export class UsersService {
     const result = await this.usersRepository.findUser(name, page);
 
     const sanatizedResult =  plainToInstance(UserResponseDto, result, {excludeExtraneousValues: true})
-    return {message: 'usuario encontrado com sucesso', result: result};
+    return {message: 'usuario encontrado com sucesso', result:sanatizedResult};
   }
   //atualizar usuario
   async updateUser(matricula: string, updateUserDto: UpdateUserDto) {

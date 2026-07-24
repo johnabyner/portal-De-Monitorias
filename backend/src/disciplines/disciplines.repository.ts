@@ -7,7 +7,7 @@ export class DisciplinesRepository{
     async createDiscipline(matricula: string, curso:string, descricao:string){
         const result = await this.db.query(
             `INSERT INTO disciplinas (professor_matricula, curso, descricao) VALUES ($1, $2, $3);`,
-            [matricula, curso, descricao]
+            [matricula ?? null, curso, descricao]
         )
         return result.rows[0];
     }
@@ -22,7 +22,7 @@ export class DisciplinesRepository{
              FROM disciplinas d  
              JOIN users u
              on d.professor_matricula = u.matricula
-             OFFSET $1 LIMIT = 20;`,
+             OFFSET $1 LIMIT  20;`,
             [page]
         )
         return result.rows;
@@ -38,10 +38,10 @@ export class DisciplinesRepository{
              JOIN users u
              on d.professor_matricula = u.matricula
              WHERE curso LIKE $1
-             OFFSET $2 LIMIT = 20;
+             OFFSET $2 LIMIT  20;
             `,
             [
-                `${query}`, page
+                `%${query}%`, page
             ]
         )
         return result.rows;
@@ -49,15 +49,15 @@ export class DisciplinesRepository{
 
     async updateDiscipline(discipline: UpdateDisciplineDto,id: number){
         const result = await this.db.query(
-            `UPDATE disciplines 
+            `UPDATE disciplinas 
              SET
-                professor_matricula = COASLESCE($1, professor_matricula),
-                curso = COASLESCE($1, curso),
-                descricao = COASLESCE($1, descricao),
+                professor_matricula = COALESCE($1, professor_matricula),
+                curso = COALESCE($2, curso),
+                descricao = COALESCE($3, descricao)
              WHERE id =  $4
             `,[discipline.professor_matricula ?? null, discipline.curso ?? null, discipline.descricao ?? null, id]
         )
-        return result.row[0];
+        return result.rows[0];
     }
 
     async deleteDiscipline(id: number){

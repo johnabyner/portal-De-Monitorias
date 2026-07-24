@@ -3,7 +3,7 @@ import { DisciplinesRepository } from './disciplines.repository';
 import { DatabaseService } from '../database/database.service';
 
 @Module({
-    providers:[DatabaseService],
+    providers:[DatabaseService,DisciplinesRepository],
     exports:[DisciplinesRepository]
 })
 export class DisciplinesModule {}
