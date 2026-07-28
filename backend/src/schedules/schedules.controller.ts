@@ -8,7 +8,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { RolesEnum } from '../auth/enums/Roles.enum';
 import { Roles } from '../auth/decorators/roles.decorator';
 
-//documentaçao das rotas com swagger e uma rota nova para adicionar os horarios
+
 @Controller('schedules')
 export class SchedulesController {
   constructor(private readonly schedulesService: SchedulesService) {}
