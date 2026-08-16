@@ -42,6 +42,7 @@ export class SchedulesController {
   @ApiOperation({summary: 'Listar horarios'})
   @ApiQuery({name:'page',example:0,required:false})
   @ApiQuery({name:'name', example: 'segunda', required:false})
+
   //GET
   @Get('')
   get(@Query('page') page = 0,@Query('name') name?: string) {
@@ -68,6 +69,7 @@ export class SchedulesController {
       }
     }
   })
+  
   //PATCH
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(RolesEnum.PROFESSOR, RolesEnum.ADMINISTRADOR, RolesEnum.MONITOR) 

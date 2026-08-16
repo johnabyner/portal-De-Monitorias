@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { createHash } from "crypto";
 import { Request } from 'express';
+import { RefreshTokenDto } from "./dto/refresh-token.dto";
 
 
 @Injectable()
@@ -31,15 +32,14 @@ export class jwtAuthService{
             //se for valido vai descomprimir
             return payload;
         }catch {
-            throw new UnauthorizedException('Token inválido');
+            throw new UnauthorizedException('acessToken inválido');
         }
     }
-
-    async verifyRefreshToken(token: string) {
+    async verifyRefreshToken(refreshToken: string) {
         try{
-            return this.jwtService.verifyAsync(token, {secret: process.env.JWT_REFRESH_SECRET,});
+            return await this.jwtService.verifyAsync(refreshToken, {secret: process.env.JWT_REFRESH_SECRET,});
         }catch{
-            throw new UnauthorizedException('Token invalido');
+            throw new UnauthorizedException('refreshToken invalido');
         }
     }
 

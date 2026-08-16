@@ -2,7 +2,9 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
-import { createHash } from 'crypto';
+import * as argon2 from 'argon2';
+
+
 
 import { UserResponseDto } from './dto/response-user.dto';
 import { plainToInstance } from 'class-transformer';
@@ -22,9 +24,7 @@ export class UsersService {
       }
 
       //senha hasheada
-      const hash = createHash('sha256'); //nosso hash no formato sha256
-      hash.update(createUserDto.senha); //vai atualizar a variavel hash, hasheando a senha
-      const hashedPassword = hash.digest('hex');
+      const hashedPassword = await argon2.hash(createUserDto.senha);
 
       const payload = {sub: createUserDto.matricula};
       const acessToken =  await this.jwtService.createAcessToken(payload);
@@ -67,7 +67,16 @@ export class UsersService {
       throw new NotFoundException('Nao existe esse usuario')
     }
 
-    const result = await this.usersRepository.updateUser(updateUserDto, matricula);
+    //senha hasheada
+    const hashedPassword = await argon2.hash(updateUserDto.senha!);
+    const user = {
+        nome: updateUserDto.nome,
+        email: updateUserDto.email,
+        senha: hashedPassword,
+        sexo: updateUserDto.sexo,
+    };
+  
+    const result = await this.usersRepository.updateUser(user, matricula);
     return {message: 'usuario atualizado com sucesso', result: result};
   }
   //deletar usuario

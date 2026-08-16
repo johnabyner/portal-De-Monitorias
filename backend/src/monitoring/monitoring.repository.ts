@@ -11,23 +11,40 @@ export class MonitoringRepository{
         const result = await this.db.query(
             `INSERT INTO monitorias
             (disciplina_id,
+             nome,
              monitor_matricula,
              professor_matricula,
              local,
              descricao,
              status)
-            VALUES($1,$2,$3,$4,$5,$6);`,
+            VALUES($1,$7,$2,$3,$4,$5,$6);`,
             [   createMonitoringDto.disciplina_id,
                 createMonitoringDto.monitor_matricula ?? null,
                 createMonitoringDto.professor_matricula,
                 createMonitoringDto.local ?? null,
                 createMonitoringDto.descricao ?? null,
                 createMonitoringDto.status ?? 'ATIVA',
+                createMonitoringDto.nome
             ]
         )
         return result.rows[0];
     }
-
+    async findByIdDiscipline(id: number){
+        const result = await this.db.query(
+            `
+                SELECT * FROM disciplinas WHERE id = $1;
+            `,[id]
+        )
+        return result.rows[0];  
+    }
+    async findByRegistration(matricula: string){
+        const result = await this.db.query(
+            `
+                SELECT * FROM users WHERE matricula = $1;
+            `,[matricula]
+        )
+        return result.rows[0];
+    }
     async findById(id: number){
         const result = await this.db.query(
             `

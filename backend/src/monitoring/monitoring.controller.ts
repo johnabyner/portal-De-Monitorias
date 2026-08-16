@@ -16,6 +16,7 @@ export class MonitoringController {
   //SWAGGER
   @ApiBearerAuth()
   @ApiOperation({summary: 'Cadastrar monitoria'})
+  @ApiBearerAuth()
   @ApiBody({
     type:CreateMonitoringDto,
     description:'Detalhes para cadastrar uma monitoria',
@@ -23,7 +24,8 @@ export class MonitoringController {
       monitoria:{
         summary:'exemplo de cadastro de monitoria',
         value:{
-          discipina_id: 1,
+          disciplina_id: 1,
+          nome: 'sociologia',
           monitor_matricula: '20230001',
           professor_matricula: '20230001',
           local: 'bliblioteca',
@@ -45,6 +47,7 @@ export class MonitoringController {
   @ApiOperation({summary: 'Listar monitorias'})
   @ApiQuery({name:'page', example: 0, required: false})
   @ApiQuery({name:'name', example: 'matematica', required: false})
+
   //GET
   @Get()
   findAllMonitoring(@Query('page', ParseIntPipe) page = 0,@Query('name') name?:string) {
@@ -58,6 +61,7 @@ export class MonitoringController {
   //SWAGGER
   @ApiBearerAuth()
   @ApiOperation({summary: 'Atualizar monitoria'})
+  @ApiBearerAuth()
   @ApiParam({name:'id', example:1})
   @ApiBody({
     type: UpdateMonitoringDto,
@@ -86,6 +90,7 @@ export class MonitoringController {
   //SWAGGER
   @ApiBearerAuth()
   @ApiOperation({summary: 'Deletar monitoria'})
+  @ApiBearerAuth()
   @ApiParam({name:'id', example:1})
   //DELETE
   @UseGuards(JwtAuthGuard, RolesGuard)

@@ -12,6 +12,13 @@ export class CreateMonitoringDto {
   readonly disciplina_id?: number;
 
   @ApiPropertyOptional({
+    description: 'Nome da monitoria.',
+    example: 'algoritmos',
+  })
+  @IsString()
+  readonly nome?: string;
+
+  @ApiPropertyOptional({
     description: 'Matrícula do monitor. Normalmente preenchida automaticamente após autenticação.',
     example: '2023123456',
   })
@@ -56,6 +63,7 @@ export class CreateMonitoringDto {
 }
 
 //disciplina_id
+//nome
 // monitor_matricula
 // professor_matricula
 // local

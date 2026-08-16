@@ -8,8 +8,19 @@ export class MonitoringService {
   constructor(private readonly monitoringRepository: MonitoringRepository){}
 
   async createMonitoring(createMonitoringDto: CreateMonitoringDto) {
-    const result = await this.monitoringRepository.createMonitoring(createMonitoringDto);
+    //verificar disciplina
+    const existsDiscipline = await this.monitoringRepository.findByIdDiscipline(createMonitoringDto.disciplina_id!);
+    if(!existsDiscipline) throw new NotFoundException('Disciplina nao encontrada');
+    //verificar monitor
+    if(createMonitoringDto.monitor_matricula){
+      const monitorIsValid = await this.monitoringRepository.findByRegistration(createMonitoringDto.monitor_matricula!);
+      if(!monitorIsValid) throw new NotFoundException('Monitor nao encontrado');
+    }
+    //verificar professor
+    const existsTeacher = await this.monitoringRepository.findByRegistration(createMonitoringDto.professor_matricula!);
+    if(!existsTeacher) throw new NotFoundException('Professor nao encontrado');
 
+    const result = await this.monitoringRepository.createMonitoring(createMonitoringDto);
     return {message: 'monitoria criado com sucesso', result};
   }
 

@@ -13,6 +13,6 @@ import { Roles } from './decorators/roles.decorator';
   ],
   controllers: [AuthController],
   providers: [AuthService,DatabaseService, jwtAuthService,UsersRepository],
-  exports: [jwtAuthService, Roles],
+  exports: [jwtAuthService],
 })
 export class AuthModule {}

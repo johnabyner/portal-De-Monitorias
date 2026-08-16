@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MonitoringModule } from './monitoring/monitoring.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { DisciplinesModule } from './disciplines/disciplines.module';
+import { FavoritesModule } from './favorites/favorites.module';
 
 @Module({
   imports: [
@@ -26,6 +27,8 @@ import { DisciplinesModule } from './disciplines/disciplines.module';
         rejectUnauthorized: false,
       },
     }),
+
+    FavoritesModule,
   ],
 
   controllers: [AppController],
