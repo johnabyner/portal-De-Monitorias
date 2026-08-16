@@ -34,11 +34,39 @@ export class FavoritesService {
     return {message: 'Monitoria favoritada com sucesso', result};
   }
   //GET
-  async findFavoriteMonitoring(request: Request, name: string) {
-    return {};
+  async findFavoriteMonitoring(request: Request, name: string,page:number) {
+    //extrair refresh token
+    const token = this.jwtAuthService.extractToken(request);
+    //validar
+    if (!token) {
+      throw new UnauthorizedException('Token não enviado');
+    }
+    const payload = await this.jwtAuthService.verifyAccessToken(token);
+    const matricula = payload.sub;  
+    const userExists = await this.favoritesRepository.findByRegistration( matricula);
+    if(!userExists){
+      throw new NotFoundException('Nao existe esse usuario')
+    } 
+
+    const result = await this.favoritesRepository.getFavoriteMonitoring(matricula, name,page)
+    return {message: 'Monitoria favorita encontrada com sucesso', result};
   }
-  async findAllFavoritesMonitorings(request: Request) {
-    return {};
+  async findAllFavoritesMonitorings(request: Request,page:number) {
+    //extrair refresh token
+    const token = this.jwtAuthService.extractToken(request);
+    //validar
+    if (!token) {
+      throw new UnauthorizedException('Token não enviado');
+    }
+    const payload = await this.jwtAuthService.verifyAccessToken(token);
+    const matricula = payload.sub;  
+    const userExists = await this.favoritesRepository.findByRegistration( matricula);
+    if(!userExists){
+      throw new NotFoundException('Nao existe esse usuario')
+    } 
+  
+    const result = await this.favoritesRepository.getAllFavoritesMonitorings(matricula,page)
+    return {message: 'Monitorias favoritas encontradas com sucesso', result};
   }
 
   //DELETE

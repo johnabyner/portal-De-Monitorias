@@ -32,12 +32,76 @@ export class FavoritesRepository{
     }
 
     //GET
-    async getAllFavoritesMonitorings(){
+    async getFavoriteMonitoring(matricula: string, name: string,page: number){
+        const result = await this.db.query(
+            `
+            SELECT
+                m.id,
+                d.curso AS disciplina,
+                u_monitor.nome AS monitor,
+                u_professor.nome AS professor,
+                m.local,
+                m.descricao,
+                m.status
+            FROM favoritos f
 
-    }
-    async getFavoriteMonitoring(){
+            INNER JOIN monitorias m
+                ON f.monitoria_id = m.id
 
+            INNER JOIN disciplinas d
+                ON m.disciplina_id = d.id
+
+            LEFT JOIN users u_monitor
+                ON m.monitor_matricula = u_monitor.matricula
+
+            INNER JOIN users u_professor
+                ON m.professor_matricula = u_professor.matricula
+
+            WHERE f.user_matricula = $1
+                AND d.curso ILIKE $2
+
+            ORDER BY m.id
+            LIMIT 20
+            OFFSET $3;
+            `,[matricula,  `%${name}%`,page]
+        )
+        return result.rows;
     }
+    async getAllFavoritesMonitorings(matricula: string,page: number){
+        const result = await this.db.query(
+            `
+            SELECT
+                m.id,
+                d.curso AS disciplina,
+                u_monitor.nome AS monitor,
+                u_professor.nome AS professor,
+                m.local,
+                m.descricao,
+                m.status
+            FROM favoritos f
+
+            INNER JOIN monitorias m
+                ON f.monitoria_id = m.id
+
+            INNER JOIN disciplinas d
+                ON m.disciplina_id = d.id
+
+            LEFT JOIN users u_monitor
+                ON m.monitor_matricula = u_monitor.matricula
+
+            INNER JOIN users u_professor
+                ON m.professor_matricula = u_professor.matricula
+
+            WHERE f.user_matricula = $1
+
+            ORDER BY m.id
+            LIMIT 20
+            OFFSET $2;
+            `,[matricula,page]
+        )
+        return result.rows;
+    }
+
     //DELETE
     async deleteFavoriteMonitoring(id: number, matricula: string){
         const result = await this.db.query(
