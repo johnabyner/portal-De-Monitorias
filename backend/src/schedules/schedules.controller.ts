@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe,
 import { SchedulesService } from './schedules.service';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
-import { ApiBody, ApiOperation, ApiParam, ApiQuery } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { RolesEnum } from '../auth/enums/Roles.enum';
@@ -14,6 +14,7 @@ export class SchedulesController {
   constructor(private readonly schedulesService: SchedulesService) {}
 
   //SWAGGER
+  @ApiBearerAuth()
   @ApiOperation({summary: 'Cadastrar horario'})
   @ApiBody({
     type: CreateScheduleDto,
@@ -53,6 +54,7 @@ export class SchedulesController {
   }
 
   //SWAGGER
+  @ApiBearerAuth()
   @ApiOperation({summary: 'Atualizar horario'})
   @ApiParam({name:'id', example: 1})
   @ApiBody({
@@ -79,6 +81,7 @@ export class SchedulesController {
   }
 
   //SWAGGER
+  @ApiBearerAuth()
   @ApiParam({name:'id', example: 1})
   //DELETE
   @UseGuards(JwtAuthGuard, RolesGuard)

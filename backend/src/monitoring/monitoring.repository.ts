@@ -60,15 +60,39 @@ export class MonitoringRepository{
                 SELECT
                     m.id,
                     d.curso,
-                    m.monitor_matricula,
-                    m.professor_matricula,
+                    monitor.nome AS monitor_nome,
+                    professor.nome AS professor_nome,
+                    m.local,
+                    m.descricao,
+                    m.status,
+                    COALESCE(
+                        json_agg(
+                            json_build_object(
+                                'dia', h.dia_semana,
+                                'inicio', h.hora_inicio,
+                                'termino', h.hora_fim
+                            )
+                        ) FILTER(WHERE h.id IS NOT NULL),
+                        '[]'
+                    ) AS horarios
+                FROM monitorias m
+                JOIN disciplinas d
+                    on m.disciplina_id = d.id
+                LEFT JOIN users monitor
+                    ON m.monitor_matricula = monitor.matricula
+                LEFT JOIN users professor
+                    ON m.professor_matricula = professor.matricula
+                LEFT JOIN horarios h
+                    on h.monitoria_id = m.id
+                WHERE m.status = 'ATIVA'
+                GROUP BY 
+                    m.id,
+                    d.curso,
+                    monitor_nome,
+                    professor_nome,
                     m.local,
                     m.descricao,
                     m.status
-                FROM monitorias m
-                join disciplinas d
-                on m.disciplina_id = d.id
-                WHERE m.status = 'ATIVA'
                 OFFSET $1 LIMIT 20 
             `,
             [page]
@@ -81,15 +105,39 @@ export class MonitoringRepository{
                 SELECT
                     m.id,
                     d.curso,
-                    m.monitor_matricula,
-                    m.professor_matricula,
+                    monitor.nome AS monitor_nome,
+                    professor.nome AS professor_nome,
+                    m.local,
+                    m.descricao,
+                    m.status,
+                    COALESCE(
+                        json_agg(
+                            json_build_object(
+                                'dia', h.dia_semana,
+                                'inicio', h.hora_inicio,
+                                'termino', h.hora_fim
+                            )
+                        ) FILTER (WHERE h.id IS NOT NULL),
+                         '[]'
+                    )
+                FROM monitorias m
+                JOIN disciplinas d
+                    on m.disciplina_id = d.id
+                LEFT JOIN users monitor
+                    on m.monitor_matricula = monitor.matricula
+                LEFT JOIN users professor
+                    on m.monitor_matricula = professor.matricula
+                LEFT JOIN horarios h
+                    on h.monitoria_id = m.id
+                WHERE d.curso ILIKE $1 AND m.status = 'ATIVA'
+                GROUP BY
+                    m.id,
+                    d.curso,
+                    monitor_nome,
+                    professor_nome,
                     m.local,
                     m.descricao,
                     m.status
-                FROM monitorias m
-                join disciplinas d
-                on m.disciplina_id = d.id
-                WHERE d.curso ILIKE $1 AND m.status = 'ATIVA'
                 OFFSET $2 LIMIT 20
             `,
             [`%${name}%`,page]
