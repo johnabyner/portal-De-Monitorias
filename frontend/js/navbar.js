@@ -1,3 +1,5 @@
+import Auth from "./Auth.js";
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const navbar = document.querySelector("#navbar");
@@ -5,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("../components/navbar.html")
         .then(response => response.text())
         .then(data => {
-
             navbar.innerHTML = data;
 
         });

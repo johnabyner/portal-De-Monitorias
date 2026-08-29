@@ -229,3 +229,17 @@ button:hover {
   color: #89583D;
 
 }
+
+#mensagem-login{
+  display: block;
+  margin: 0 0 15px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.mensagemServidorSucesso{
+    color: #64e73c;
+}
+.mensagemServidorErro{
+    color: #E74C3C;
+}

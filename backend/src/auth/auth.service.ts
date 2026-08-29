@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     //criar acessToken e refreshToken
-    const payload = {sub: loginAuthDto.matricula};
+    const payload = {sub: loginAuthDto.matricula, role: userExists.role};
     const acessToken = await this.jwtAuthService.createAcessToken(payload);
     const refreshToken = await this.jwtAuthService.createRefreshToken(payload);
 
@@ -46,7 +46,7 @@ export class AuthService {
     const payload = await this.jwtAuthService.verifyRefreshToken(refreshToken);
     //retornar acessToken
     const matricula = payload.sub;
-    const acessToken = await this.jwtAuthService.createAcessToken({sub: matricula});
+    const acessToken = await this.jwtAuthService.createAcessToken({sub: matricula, role: payload.role});
     return {message: 'RefreshTOken valido',acessToken};
   }
 

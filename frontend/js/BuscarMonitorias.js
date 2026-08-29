@@ -9,7 +9,9 @@ class BuscarMonitorias{
 
             if(!resposta.ok){throw new Error(`Erro ao listar monitorias: ${resposta.status}`);};
             const dados = await resposta.json();
-            console.log(dados)
+
+            console.log(dados);
+            //fazer algum modo de nao precisar buscar,salvar no navegador
 
             return dados.result;
         }catch(err){

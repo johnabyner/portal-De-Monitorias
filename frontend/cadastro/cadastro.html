@@ -29,6 +29,8 @@
             <h2>Cadastro</h2>
         </div>
 
+        <span id="mensagem-login"></span>
+
 
         <div class="campo">
             <label for="matricula">Matrícula</label>
@@ -38,6 +40,8 @@
                 id="matricula"
                 name="matricula"
                 placeholder="Digite sua matrícula"
+                minlength="8"
+                maxlength="11"
                 pattern="[0-9]+"
                 title="A matrícula deve conter apenas números"
                 inputmode="numeric"
@@ -156,8 +160,8 @@
     </form>
 
 
-    <script src="../js/validacao.js"></script>
-    <script src="../js/navbar.js"></script>
+    <script type="module" src="../js/validacaoCadastro.js"></script>
+    <script type="module" src="../js/navbar.js"></script>
 
 </body>
 </html>
