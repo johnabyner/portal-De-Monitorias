@@ -1,0 +1,111 @@
+.navbar {
+
+    width: 100%;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background-color: #F3D8C7;
+
+    border-bottom: 1px solid #E8C7B5;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    z-index: 1000;
+}
+
+
+
+.navbar-logo {
+
+    font-size: 36px;
+    font-weight: 700;
+
+    color: #292929;
+
+}
+
+
+
+/* Ícone da direita (usuário) */
+.navbar-links {
+
+    position: absolute;
+    right: 40px;
+
+    display: flex;
+    gap: 25px;
+
+}
+
+
+/* Ícone da esquerda (home) */
+.navbar-left {
+
+    position: absolute;
+    left: 40px;
+
+    display: flex;
+    gap: 25px;
+
+}
+
+
+
+/* Links dos ícones */
+.navbar-links a,
+.navbar-left a {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    color: #A66F4F;
+
+    font-weight: 600;
+
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+
+/* Hover dos ícones */
+.navbar-links a:hover,
+.navbar-left a:hover {
+
+    background-color: #E8C7B5;
+
+    transform: scale(1.1);
+
+    box-shadow: 0 4px 10px rgba(166, 111, 79, 0.25);
+
+}
+
+
+
+/* Imagem SVG */
+.navbar-links img,
+.navbar-left img {
+
+    width: 24px;
+    height: 24px;
+
+}

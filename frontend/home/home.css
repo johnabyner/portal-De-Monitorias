@@ -1,0 +1,222 @@
+#hero {
+
+    min-height: calc(100vh - 70px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 70px 24px;
+
+}
+
+
+
+.hero-container {
+
+    max-width: 900px;
+
+}
+
+
+
+/* Imagem do hero */
+
+.hero-container img {
+
+    width: 280px;
+
+    height: auto;
+
+    margin-bottom: 50px;
+
+    animation: aparecerImagem 0.8s ease;
+
+}
+
+
+
+/* Título */
+
+.hero-container h1 {
+
+    font-size: 64px;
+
+    line-height: 1.1;
+
+    font-weight: 700;
+
+    color: #292929;
+
+    margin: 0 0 24px;
+
+}
+
+
+
+/* Subtítulo */
+
+.hero-container p {
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    color: #A66F4F;
+
+    margin: 0 0 40px;
+
+}
+
+
+
+/* Botões */
+
+.hero-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+}
+
+
+
+.hero-buttons a {
+
+    width: 200px;
+
+    padding: 14px 20px;
+
+    border-radius: 10px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+
+}
+
+
+
+/* Botão transparente */
+
+.btn-monitorias {
+
+    color: #A66F4F;
+
+    border: 2px solid #A66F4F;
+
+    background-color: transparent;
+
+}
+
+
+
+.btn-monitorias:hover {
+
+    background-color: #F3D8C7;
+
+}
+
+
+
+/* Botão preenchido */
+
+.btn-app {
+
+    color: #FFFFFF;
+
+    background-color: #A66F4F;
+
+    border: 2px solid #A66F4F;
+
+}
+
+
+
+.btn-app:hover {
+
+    background-color: #89583D;
+
+    border-color: #89583D;
+
+}
+
+
+
+/* Animação da imagem */
+
+@keyframes aparecerImagem {
+
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-20px);
+
+    }
+
+
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+
+}
+
+
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+
+
+    .hero-container h1 {
+
+        font-size: 42px;
+
+    }
+
+
+
+    .hero-container p {
+
+        font-size: 24px;
+
+    }
+
+
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+        align-items: center;
+
+    }
+
+
+    .hero-buttons a {
+
+        width: 250px;
+
+    }
+
+
+}
