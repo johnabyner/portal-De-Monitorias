@@ -23,7 +23,7 @@ export class FavoritesController {
   @UseGuards(JwtAuthGuard)
   @Post(':id')
   createFavoriteMonitoring(@Req() request: Request, @Param('id', ParseIntPipe) id: number) {
-    return this.favoritesService.creatFavoriteMonitoring(request, id);
+    return this.favoritesService.createFavoriteMonitoring(request, id);
   }
 
   //SWAGGER

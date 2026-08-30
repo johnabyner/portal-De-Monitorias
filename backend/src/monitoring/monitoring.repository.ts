@@ -84,7 +84,8 @@ export class MonitoringRepository{
                     ON m.professor_matricula = professor.matricula
                 LEFT JOIN horarios h
                     on h.monitoria_id = m.id
-                WHERE m.status = 'ATIVA'
+                    WHERE m.status = 'ATIVA'
+
                 GROUP BY 
                     m.id,
                     d.curso,

@@ -30,6 +30,19 @@ export class FavoritesRepository{
 
         return result.rows[0];
     }
+    async findFavorite(matricula: number, monitoriaId: number) {
+        const result = await this.db.query(
+            `
+            SELECT *
+            FROM favoritos
+            WHERE user_matricula = $1
+            AND monitoria_id = $2
+            `,
+            [matricula, monitoriaId]
+        );
+
+        return result.rows[0];
+    }
 
     //GET
     async getFavoriteMonitoring(matricula: string, name: string,page: number){
@@ -37,12 +50,22 @@ export class FavoritesRepository{
             `
             SELECT
                 m.id,
-                d.curso AS disciplina,
-                u_monitor.nome AS monitor,
-                u_professor.nome AS professor,
+                d.curso ,
+                u_monitor.nome AS monitor_nome,
+                u_professor.nome AS professor_nome,
                 m.local,
                 m.descricao,
-                m.status
+                m.status,
+                COALESCE(
+                        json_agg(
+                            json_build_object(
+                                'dia', h.dia_semana,
+                                'inicio', h.hora_inicio,
+                                'termino', h.hora_fim
+                            )
+                        ) FILTER(WHERE h.id IS NOT NULL),
+                        '[]'
+                    ) AS horarios
             FROM favoritos f
 
             INNER JOIN monitorias m
@@ -56,9 +79,22 @@ export class FavoritesRepository{
 
             INNER JOIN users u_professor
                 ON m.professor_matricula = u_professor.matricula
-
+     
+            LEFT JOIN horarios h
+                on h.monitoria_id = m.id
+            
             WHERE f.user_matricula = $1
                 AND d.curso ILIKE $2
+                AND m.status = 'ATIVA'
+
+            GROUP BY 
+                m.id,
+                d.curso,
+                monitor_nome,
+                professor_nome,
+                m.local,
+                m.descricao,
+                m.status
 
             ORDER BY m.id
             LIMIT 20
@@ -72,12 +108,22 @@ export class FavoritesRepository{
             `
             SELECT
                 m.id,
-                d.curso AS disciplina,
-                u_monitor.nome AS monitor,
-                u_professor.nome AS professor,
+                d.curso,
+                u_monitor.nome AS monitor_nome,
+                u_professor.nome AS professor_nome,
                 m.local,
                 m.descricao,
-                m.status
+                m.status,
+                COALESCE(
+                        json_agg(
+                            json_build_object(
+                                'dia', h.dia_semana,
+                                'inicio', h.hora_inicio,
+                                'termino', h.hora_fim
+                            )
+                        ) FILTER(WHERE h.id IS NOT NULL),
+                        '[]'
+                ) AS horarios
             FROM favoritos f
 
             INNER JOIN monitorias m
@@ -88,11 +134,24 @@ export class FavoritesRepository{
 
             LEFT JOIN users u_monitor
                 ON m.monitor_matricula = u_monitor.matricula
-
+                
             INNER JOIN users u_professor
                 ON m.professor_matricula = u_professor.matricula
 
-            WHERE f.user_matricula = $1
+            LEFT JOIN horarios h
+                ON h.monitoria_id = m.id
+
+            WHERE m.status = 'ATIVA'
+            AND f.user_matricula = $1
+
+            GROUP BY 
+                m.id,
+                d.curso,
+                monitor_nome,
+                professor_nome,
+                m.local,
+                m.descricao,
+                m.status
 
             ORDER BY m.id
             LIMIT 20
@@ -106,7 +165,7 @@ export class FavoritesRepository{
     async deleteFavoriteMonitoring(id: number, matricula: string){
         const result = await this.db.query(
             `
-                DELETE FROM favoritos WHERE id = $1 AND user_matricula = $2;
+                DELETE FROM favoritos WHERE monitoria_id = $1 AND user_matricula = $2;
             `,[id, matricula]
         )
         return result.rows[0];

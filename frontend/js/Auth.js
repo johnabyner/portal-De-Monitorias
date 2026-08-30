@@ -45,6 +45,8 @@ class Auth{
         localStorage.setItem('refreshToken', dados.refreshToken);
     }
 
+    //vai fazer a busca ja enviando os tokens
+    //e se o acess estiver expirado ele vai renovar com o refresh
     static async fetchAuth(url, options={}){
         let token = localStorage.getItem('acessToken');
 

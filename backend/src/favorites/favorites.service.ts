@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { UpdateFavoriteDto } from './dto/update-favorite.dto';
 import { AuthService } from '../auth/auth.service';
@@ -11,7 +11,7 @@ import { FavoritesRepository } from './favorites.repository';
 export class FavoritesService {
   constructor(private readonly jwtAuthService: jwtAuthService, private readonly favoritesRepository: FavoritesRepository){}
 
-  async creatFavoriteMonitoring(request: Request, id: number) {
+  async createFavoriteMonitoring(request: Request, id: number) {
     //extrair refresh token
     const token = this.jwtAuthService.extractToken(request);
     //validar
@@ -28,6 +28,14 @@ export class FavoritesService {
     const monitoringExists = await this.favoritesRepository.findMonitoring(id);
     if(!monitoringExists){
       throw new NotFoundException('Monitoria nao existe')
+    }
+
+    const favoriteExists = await this.favoritesRepository.findFavorite(
+      matricula,
+      id
+    );
+    if(favoriteExists){
+      throw new ConflictException('Essa monitoria ja esta nos favoritos')
     }
 
     const result = await this.favoritesRepository.createFavoriteMonitoring(matricula, id); 

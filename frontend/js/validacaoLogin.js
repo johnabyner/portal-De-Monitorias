@@ -99,7 +99,7 @@ formulario.addEventListener("submit", async function(event) {
             )
 
             if (resposta.ok) {
-                //window.location.href = "../monitorias/monitorias.html";
+                window.location.href = "../monitorias/monitorias.html";
             }
         }, 3000);
 
