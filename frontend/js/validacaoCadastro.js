@@ -119,7 +119,8 @@ formulario.addEventListener("submit", async function(event) {
                
         //salvar no localstorage tokens
         Auth.salvarJWT(resposta.dados);
-    
+        Nome.definir(resposta.dados.nome);
+        
     } catch (erro) {console.error("Erro no cadastro:",erro);
     }
 });

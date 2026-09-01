@@ -1,14 +1,15 @@
-import Auth from "./Auth.js";
+import Nome from "./Nome.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-
+document.addEventListener("DOMContentLoaded", () => { //vai esperar a pagina carregar
     const navbar = document.querySelector("#navbar");
 
-    fetch("../components/navbar.html")
-        .then(response => response.text())
-        .then(data => {
+    fetch("../components/navbar.html") //vai buscar o arquivo nav padrao 
+        .then(response => response.text()) //transformar a resposta em texto
+        .then(data => { //vai carregar a pagina com o arquivo nav
             navbar.innerHTML = data;
 
+            //vai adicionar o nome
+            const nome = navbar.querySelector(".nome");
+            nome.textContent = Nome.obter();
         });
-
 });

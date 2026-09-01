@@ -1,4 +1,5 @@
 import Auth from "./Auth.js";
+import Nome from "./Nome.js";
 
 const formulario = document.querySelector("form");
 const campos = formulario.querySelectorAll("input:not([type='radio'])");
@@ -84,6 +85,7 @@ formulario.addEventListener("submit", async function(event) {
     try {
         //BUSCA ao servidor
         const resposta = await Auth.autenticarUsuario(usuario);
+
         //vai mostrar a mensagem do servidor
         if(resposta.ok){
             mensagemLogin.classList.add('mensagemServidorSucesso')
@@ -110,6 +112,7 @@ formulario.addEventListener("submit", async function(event) {
         
         //salvar tokens
         Auth.salvarJWT(resposta.dados);
+        Nome.definir(resposta.dados.nome);
 
     } catch (erro) {
         console.error("Erro no login:", erro);

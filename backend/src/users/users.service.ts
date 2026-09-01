@@ -18,7 +18,6 @@ export class UsersService {
   async createUser(createUserDto: CreateUserDto) {
       //verificar se ja tem essa matricula cadastrada
       const userExists = await this.usersRepository.findByRegistration( createUserDto.matricula);
-
       if (userExists) {
         throw new ConflictException('usuario já cadastrado');
       }
@@ -40,8 +39,9 @@ export class UsersService {
         refreshtoken: refreshToken
       };
       const result = await this.usersRepository.createUser(user); //vai mandar pro repository com os parametros sanitizados pelo DTO
+      const nome = createUserDto.nome;
 
-      return {message: 'usuario criado com sucesso',acessToken, refreshToken,result: result};
+      return {message: 'usuario criado com sucesso',nome,acessToken, refreshToken,result: result};
   }
 
 

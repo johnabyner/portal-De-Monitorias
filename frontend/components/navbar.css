@@ -43,6 +43,25 @@
     gap: 25px;
 
 }
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nome {
+    margin: 1;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    color: #292929;
+
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 
 /* Ícone da esquerda (home) */
@@ -90,13 +109,9 @@
 /* Hover dos ícones */
 .navbar-links a:hover,
 .navbar-left a:hover {
-
     background-color: #E8C7B5;
-
     transform: scale(1.1);
-
     box-shadow: 0 4px 10px rgba(166, 111, 79, 0.25);
-
 }
 
 
@@ -105,7 +120,7 @@
 .navbar-links img,
 .navbar-left img {
 
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
 
 }

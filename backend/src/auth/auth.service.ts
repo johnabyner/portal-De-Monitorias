@@ -26,6 +26,7 @@ export class AuthService {
       throw new UnauthorizedException('Matrícula ou senha inválida');
     }
 
+    const nome = userExists.nome;
     //criar acessToken e refreshToken
     const payload = {sub: loginAuthDto.matricula, role: userExists.role};
     const acessToken = await this.jwtAuthService.createAcessToken(payload);
@@ -34,7 +35,7 @@ export class AuthService {
     //se estiver atualiza o refresh no bd
     const result = await this.usersRepository.updateRefreshToken(loginAuthDto.matricula, refreshToken)
 
-    return {message: 'usuario logado com sucesso', acessToken, refreshToken, result}
+    return {message: 'usuario logado com sucesso',nome,acessToken, refreshToken, result}
   }
 
   async refreshToken(refreshToken: string){
@@ -47,7 +48,7 @@ export class AuthService {
     //retornar acessToken
     const matricula = payload.sub;
     const acessToken = await this.jwtAuthService.createAcessToken({sub: matricula, role: payload.role});
-    return {message: 'RefreshTOken valido',acessToken};
+    return {message: 'RefreshToken valido',acessToken};
   }
 
 }
