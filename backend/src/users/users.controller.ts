@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Query, UseGuards, Request } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -7,6 +7,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { RolesEnum } from '../auth/enums/Roles.enum';
+import { UpdateRoleDto } from './dto/update-role.dto';
 
 @ApiTags('users') //swagger
 @Controller('users')
@@ -73,11 +74,21 @@ export class UsersController {
       }
     }
   })
-  //PATCH
   @UseGuards(JwtAuthGuard)
+  //PATCH
   @Patch(':matricula')
   updateUser(@Param('matricula') matricula: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.updateUser(matricula,updateUserDto);
+  }
+
+  //SWAGGER
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RolesEnum.PROFESSOR, RolesEnum.ADMINISTRADOR)
+  //PATCH /users/{matricula}/role
+  @Patch(':matricula/role')
+  updateRole(@Param('matricula') matricula: string, @Body() updateRoleDto: UpdateRoleDto, @Request() request: Request){
+    return this.usersService.updateRole(matricula,updateRoleDto,request);
   }
 
   //SWAGGER
@@ -92,4 +103,3 @@ export class UsersController {
     return this.usersService.deleteUser(matricula);
   }
 }
-

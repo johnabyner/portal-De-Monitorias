@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
@@ -9,6 +9,8 @@ import * as argon2 from 'argon2';
 import { UserResponseDto } from './dto/response-user.dto';
 import { plainToInstance } from 'class-transformer';
 import { jwtAuthService } from '../auth/JwtAuth.service';
+import { UpdateRoleDto } from './dto/update-role.dto';
+import { RolesEnum } from '../auth/enums/Roles.enum';
 
 @Injectable()
 export class UsersService {
@@ -60,6 +62,7 @@ export class UsersService {
     const sanatizedResult =  plainToInstance(UserResponseDto, result, {excludeExtraneousValues: true})
     return {message: 'usuario encontrado com sucesso', result:sanatizedResult};
   }
+
   //atualizar usuario
   async updateUser(matricula: string, updateUserDto: UpdateUserDto) {
     const userExists = await this.usersRepository.findByRegistration( matricula);
@@ -79,6 +82,25 @@ export class UsersService {
     const result = await this.usersRepository.updateUser(user, matricula);
     return {message: 'usuario atualizado com sucesso', result: result};
   }
+  async updateRole(matricula: string, updateRoleDto: UpdateRoleDto, request: Request){
+    const userExists = await this.usersRepository.findByRegistration(matricula);
+    if(!userExists){
+      throw new NotFoundException('Nao existe este usuario');
+    }
+
+    const currentUser = request['user'];
+    const newRole = updateRoleDto.role;
+    if(currentUser.role === RolesEnum.PROFESSOR && newRole === RolesEnum.PROFESSOR || currentUser.role === RolesEnum.PROFESSOR && newRole === RolesEnum.ADMINISTRADOR){
+      throw new ForbiddenException('Um professor nao pode promover um usuario para este cargo')
+    }
+    if (currentUser.matricula === matricula) {
+      throw new ForbiddenException('Você não pode alterar o próprio cargo');
+    }
+
+    const result = await this.usersRepository.updateRole(matricula,newRole)
+    return {message: 'Cargo atualizdo com sucesso', result}
+  }
+
   //deletar usuario
   async deleteUser(matricula: string) {
     const userExists = await this.usersRepository.findByRegistration( matricula);

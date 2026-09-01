@@ -4,13 +4,13 @@ import {
   ForbiddenException,
   Injectable,
 } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { ROLES_KEY } from '../decorators/roles.decorator';
+import { Reflector } from '@nestjs/core'; //permite ler as informaçoes colocadas nos decoratores, @ROLES("PROFESSOR")
+import { ROLES_KEY } from '../decorators/roles.decorator'; //importa a chave usada pelo seu decorator, @ROLES
 import { UsersRepository } from '../../users/users.repository';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(
+  constructor( //inicializando no nosso bojeto
     private reflector: Reflector, //Serve para ler os decorators.
     private usersRepository: UsersRepository,
   ) {}
@@ -34,7 +34,6 @@ export class RolesGuard implements CanActivate {
     const user = await this.usersRepository.findByRegistration(
       payload.sub,
     );
-
     if (!user) { //se nao tiver um user com essa matricula
       throw new ForbiddenException();
     }

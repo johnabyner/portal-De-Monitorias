@@ -1,7 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateMonitoringDto } from './dto/create-monitoring.dto';
 import { UpdateMonitoringDto } from './dto/update-monitoring.dto';
 import { MonitoringRepository } from './monitoring.repository';
+import { RolesEnum } from '../auth/enums/Roles.enum';
 
 @Injectable()
 export class MonitoringService {
@@ -37,13 +38,26 @@ export class MonitoringService {
     return {message:'monitorias encontradas com sucesso', result};
   }
 
-  async updateMonitoring(id: number, updateMonitoringDto: UpdateMonitoringDto) {
+  async updateMonitoring(id: number, updateMonitoringDto: UpdateMonitoringDto, user: any) {
     //verificar se existe essa monitoria cadastrada
     const monitoringExists = await this.monitoringRepository.findById(id);
     if(!monitoringExists) throw new NotFoundException('Nao existe essa monitoria');
 
-    const result = await this.monitoringRepository.updateMonitoring(id,updateMonitoringDto);
+    if(user.role  === RolesEnum.MONITOR){
+      //se nao for correspondente com a matricula do monitor da monitoria
+      if(monitoringExists.monitor_matricula !== user.sub){
+        throw new ForbiddenException("Voce nao pode editar essa monitoria");
+      }
 
+      //monitor so pode alterar isso
+      updateMonitoringDto = {
+        local: updateMonitoringDto.local,
+        descricao: updateMonitoringDto.descricao
+      }
+    }
+
+    //vai retornar, professores e administradores chegam aqui
+    const result = await this.monitoringRepository.updateMonitoring(id,updateMonitoringDto);
     return {message: 'monitoria editada com sucesso', result};
   }
 

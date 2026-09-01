@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "../database/database.service";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { CreateUserDto } from "./dto/create-user.dto";
+import { RolesEnum } from "../auth/enums/Roles.enum";
+import { UpdateRoleDto } from "./dto/update-role.dto";
 
 @Injectable()
 export class UsersRepository {
@@ -78,6 +80,18 @@ export class UsersRepository {
                 matricula
             ]
         )
+        return result.rows[0];
+    }
+
+    async updateRole(matricula: string, newRole: RolesEnum){
+        const result = await this.db.query(
+            `
+            UPDATE users
+            SET role = $1
+            WHERE matricula = $2
+            `,[newRole,matricula]
+        );
+        
         return result.rows[0];
     }
 

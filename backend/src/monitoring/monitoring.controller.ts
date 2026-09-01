@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query, UseGuards, Request } from '@nestjs/common';
 import { MonitoringService } from './monitoring.service';
 import { CreateMonitoringDto } from './dto/create-monitoring.dto';
 import { UpdateMonitoringDto } from './dto/update-monitoring.dto';
@@ -74,17 +74,17 @@ export class MonitoringController {
           monitor_matricula: '20230001',
           local: 'bliblioteca',
           descricao: 'venha com seu material',
-          status: 'ATIVADA'
+          status: 'ATIVA'
         }
       }
     }
   })
   //PATCH
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(RolesEnum.PROFESSOR, RolesEnum.ADMINISTRADOR)  
+  @Roles(RolesEnum.PROFESSOR, RolesEnum.MONITOR,RolesEnum.ADMINISTRADOR)  
   @Patch(':id')
-  updateMonitoring(@Param('id', ParseIntPipe) id: number, @Body() updateMonitoringDto: UpdateMonitoringDto) {
-    return this.monitoringService.updateMonitoring(id, updateMonitoringDto);
+  updateMonitoring(@Param('id', ParseIntPipe) id: number, @Body() updateMonitoringDto: UpdateMonitoringDto, @Request() request) {
+    return this.monitoringService.updateMonitoring(id, updateMonitoringDto, request.user);
   }
   
   //SWAGGER
