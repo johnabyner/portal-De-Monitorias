@@ -1,0 +1,236 @@
+#gerenciar-monitoria {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 120px 50px;
+}
+
+.voltar {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.voltar:hover {
+    color: #A66F4F;
+}
+
+.cabecalho-gerenciar-monitoria {
+    margin-bottom: 35px;
+}
+
+.cabecalho-gerenciar-monitoria h1 {
+    margin: 0;
+    color: #292929;
+    font-size: 42px;
+}
+
+.cabecalho-gerenciar-monitoria p {
+    margin: 8px 0 0;
+    color: #777;
+    font-size: 15px;
+}
+
+.formulario-monitoria {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.bloco-formulario {
+    padding: 32px;
+    border: 2px solid #292929;
+    border-radius: 30px;
+    background: #F3D8C7;
+}
+
+.titulo-bloco {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(41, 41, 41, .25);
+}
+
+.titulo-bloco h2 {
+    margin: 0;
+    color: #292929;
+    font-size: 24px;
+}
+
+.titulo-bloco span {
+    display: block;
+    margin-top: 4px;
+    color: #666;
+    font-size: 13px;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo:last-child {
+    margin-bottom: 0;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    color: #292929;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.opcional {
+    margin-left: 5px;
+    color: #777;
+    font-weight: 400;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 2px solid #292929;
+    border-radius: 10px;
+    outline: none;
+    background: #FFF;
+    color: #292929;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: #89583D;
+}
+
+.campo textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.campo select {
+    cursor: pointer;
+}
+
+.horario {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+}
+
+.horarios-input {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.horarios-input input {
+    flex: 1;
+}
+
+.horarios-input span {
+    color: #292929;
+    font-weight: 600;
+}
+
+.btn-adicionar-horario {
+    width: auto;
+    padding: 10px 16px;
+    border: 2px solid #292929;
+    border-radius: 10px;
+    background: transparent;
+    color: #292929;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-adicionar-horario:hover {
+    background: #292929;
+    color: #FFF;
+}
+
+.acoes-formulario {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-cancelar,
+.btn-criar {
+    padding: 12px 22px;
+    border: 2px solid #292929;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    color: #292929;
+    background: #FFF;
+    text-decoration: none;
+}
+
+.btn-cancelar:hover {
+    background: #EEE;
+}
+
+.btn-criar {
+    padding: 13px 24px;
+    background: #A66F4F;
+    color: #FFF;
+}
+
+.btn-criar:hover {
+    background: #89583D;
+    box-shadow: 0 4px 0 #292929;
+}
+
+.mensagem-erro {
+    display: none;
+    margin-top: 6px;
+    color: #E74C3C;
+    font-size: 13px;
+}
+
+.campo.erro .mensagem-erro {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    #gerenciar-monitoria {
+        padding: 100px 24px;
+    }
+
+    .cabecalho-gerenciar-monitoria h1 {
+        font-size: 32px;
+    }
+
+    .bloco-formulario {
+        padding: 24px;
+    }
+
+    .horario {
+        grid-template-columns: 1fr;
+    }
+
+    .acoes-formulario {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .btn-cancelar,
+    .btn-criar {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}

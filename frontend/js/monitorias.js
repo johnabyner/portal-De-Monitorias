@@ -9,16 +9,31 @@
 //     horarios: [...]
 // }
 
+import Auth from "./Auth.js";
 import BuscarMonitorias from "./BuscarMonitorias.js";
 import BuscarMonitoriasFavoritas from './BuscarMonitoriasFavoritas.js'
 import { criarCardMonitoria } from "./cardMonitoria.js";
 
-const listaMonitorias = document.querySelector(".lista-monitorias")
+const listaMonitorias = document.querySelector(".lista-monitorias");
+const botaoCriarMonitoria = document.querySelector("#btn-criar-monitoria");
 
+if(Auth.verificarCargo() === "professor" || Auth.verificarCargo() === "administrador"){
+    botaoCriarMonitoria.hidden = false;
+}
+
+botaoCriarMonitoria.addEventListener('click', ()=>{
+    window.location.href = "./criarMonitoria.html";
+})
+
+//vai renderizar as monitorias
 async function renderizarMonitorias() {
     try {
         const monitorias = await BuscarMonitorias.listarMonitorias();
-        const favoritos = await BuscarMonitoriasFavoritas.listarIdsFavoritos();
+        let favoritos = new Set();
+
+        if(Auth.verificarCargo() !== 'visitante'){
+            favoritos = await BuscarMonitoriasFavoritas.listarIdsFavoritos();
+        }
 
         //se na busca nao vier nenhuma monitoria
         if (!monitorias?.length) {

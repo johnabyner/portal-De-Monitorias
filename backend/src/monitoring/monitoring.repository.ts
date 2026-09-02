@@ -145,6 +145,17 @@ export class MonitoringRepository{
         )
         return result.rows;
     }
+    async findMyMonitoring(registration: string, page: number, column: string){
+        const result = await this.db.query(
+            `
+            SELECT * FROM monitorias 
+            WHERE ${column} = $1
+            OFFSET $2
+            LIMIT 20
+            `,[registration, page]
+        ) 
+        return result.rows
+    }
 
     async updateMonitoring(id: number,updateMonitoringDto: UpdateMonitoringDto){
         const result = await this.db.query(

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar Monitoria | Portal de Monitorias</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="../components/navbar.css">
+    <link rel="stylesheet" href="GerenciarMonitoria.css">
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <main>
+        <section id="gerenciar-monitoria">
+
+            <a href="./monitorias.html" class="voltar">
+                ← Voltar para monitorias
+            </a>
+
+            <div class="cabecalho-gerenciar-monitoria">
+                <h1>Criar nova monitoria</h1>
+                <p>Cadastre uma nova oportunidade de monitoria para os alunos.</p>
+            </div>
+
+            <form class="formulario-monitoria" novalidate>
+
+                <div class="bloco-formulario">
+
+                    <div class="titulo-bloco">
+                        <h2>Informações da monitoria</h2>
+                        <span>Preencha os dados da monitoria</span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="monitor">
+                            Monitor <span class="opcional">(opcional)</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="monitor"
+                            name="monitor_matricula"
+                            placeholder="Digite a matrícula do monitor"
+                        >
+
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="disciplina">Disciplina</label>
+
+                        <select id="disciplina" name="disciplina_id" required>
+                            <option value="" selected disabled>
+                                Selecione uma disciplina
+                            </option>
+                        </select>
+
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="local">Local</label>
+
+                        <input
+                            type="text"
+                            id="local"
+                            name="local"
+                            placeholder="Ex: Sala 12"
+                            required
+                        >
+
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="descricao">Descrição</label>
+
+                        <textarea
+                            id="descricao"
+                            name="descricao"
+                            placeholder="Explique como funciona essa monitoria..."
+                            rows="5"
+                            required
+                        ></textarea>
+
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                </div>
+
+                <div class="bloco-formulario">
+
+                    <div class="titulo-bloco">
+                        <h2>Horários</h2>
+                        <span>Defina quando a monitoria acontecerá</span>
+                    </div>
+
+                    <div class="horario">
+
+                        <div class="campo">
+                            <label for="dia">Dia</label>
+
+                            <select id="dia" name="dia" required>
+                                <option value="" selected disabled>
+                                    Selecione o dia
+                                </option>
+                                <option value="segunda">Segunda-feira</option>
+                                <option value="terca">Terça-feira</option>
+                                <option value="quarta">Quarta-feira</option>
+                                <option value="quinta">Quinta-feira</option>
+                                <option value="sexta">Sexta-feira</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label>Horário</label>
+
+                            <div class="horarios-input">
+                                <input
+                                    type="time"
+                                    id="horarioInicio"
+                                    name="horario_inicio"
+                                    required
+                                >
+
+                                <span>—</span>
+
+                                <input
+                                    type="time"
+                                    id="horarioFim"
+                                    name="horario_fim"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn-adicionar-horario"
+                    >
+                        + Adicionar outro horário
+                    </button>
+
+                </div>
+
+                <div class="acoes-formulario">
+                    <a href="./monitorias.html" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-criar">
+                        Criar monitoria
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+    </main>
+
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/criarMonitoria.js"></script>
+</body>
+</html>

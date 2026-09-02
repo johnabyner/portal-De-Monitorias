@@ -38,6 +38,30 @@ export class MonitoringService {
     return {message:'monitorias encontradas com sucesso', result};
   }
 
+  async findMyMonitoring(request: Request, page: number){
+    const currentUser = request['user'];
+    const registration = currentUser.sub;
+    const role = currentUser.role;
+    
+    const userExists = await this.monitoringRepository.findByRegistration(registration);
+    if(!userExists){
+      throw new NotFoundException('Esse usuario nao existe');
+    }
+
+    let column: string;
+    if(role === RolesEnum.MONITOR) {
+      column = 'monitor_matricula'
+    }else if(role === RolesEnum.PROFESSOR){
+      column = 'professor_matricula'
+    }else{
+      //para o administrador
+      return {message:'adminstrador precisa criar monitorias?'}      
+    }
+
+    const result = await this.monitoringRepository.findMyMonitoring(registration,page, column);
+    return {message:'monitorias encontradas com sucesso', result}
+  }
+
   async updateMonitoring(id: number, updateMonitoringDto: UpdateMonitoringDto, user: any) {
     //verificar se existe essa monitoria cadastrada
     const monitoringExists = await this.monitoringRepository.findById(id);

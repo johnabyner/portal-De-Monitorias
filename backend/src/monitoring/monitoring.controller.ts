@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query, UseGuards, Request, Req } from '@nestjs/common';
 import { MonitoringService } from './monitoring.service';
 import { CreateMonitoringDto } from './dto/create-monitoring.dto';
 import { UpdateMonitoringDto } from './dto/update-monitoring.dto';
@@ -47,7 +47,6 @@ export class MonitoringController {
   @ApiOperation({summary: 'Listar monitorias'})
   @ApiQuery({name:'page', example: 0, required: false})
   @ApiQuery({name:'name', example: 'matematica', required: false})
-
   //GET
   @Get()
   findAllMonitoring(@Query('page', ParseIntPipe) page = 0,@Query('name') name?:string) {
@@ -56,6 +55,18 @@ export class MonitoringController {
     }
 
     return this.monitoringService.findAllMonitoring(page);
+  }
+
+  //SWAGGER
+  @ApiBearerAuth()
+  @ApiOperation({summary: 'Listar minhas monitorias a qual sou dono'})
+  @ApiQuery({name:'page', example: 0, required: false})
+  //GET /monitoring/me
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(RolesEnum.PROFESSOR, RolesEnum.MONITOR, RolesEnum.ADMINISTRADOR)
+  @Get('/me')
+  findMyMonitoring(@Request() request: Request, @Query('page',ParseIntPipe) page = 0){
+    return this.monitoringService.findMyMonitoring(request, page);
   }
 
   //SWAGGER

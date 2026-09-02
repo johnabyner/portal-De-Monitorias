@@ -1,20 +1,47 @@
 #monitorias {
-
     padding: 120px 50px;
-
 }
 
+.cabecalho-monitorias {
+    position: relative;
+}
 
 #monitorias h1 {
-
     text-align: center;
-
     font-size: 48px;
+    color: #292929;
+    margin-bottom: 50px;
+}
 
+#btn-criar-monitoria {
+    width: auto;
+    max-width: max-content;
+
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    padding: 12px 20px;
+
+    border: 2px solid #292929;
+    border-radius: 12px;
+
+    background-color: #F3D8C7;
     color: #292929;
 
-    margin-bottom: 50px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
 
+    cursor: pointer;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#btn-criar-monitoria:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 0 #292929;
 }
 
 
@@ -194,16 +221,13 @@
 
     justify-content: space-between;
 
-    gap: 16px;
+    gap: px;
 
 }
 
 .card-monitoria p {
-
     font-size: 22px;
-
     margin: 0;
-
     color: #292929;
 
 }
