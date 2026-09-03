@@ -26,9 +26,9 @@ botaoCriarMonitoria.addEventListener('click', ()=>{
 })
 
 //vai renderizar as monitorias
-async function renderizarMonitorias() {
+async function renderizarMonitorias(page = 0,name ='') {
     try {
-        const monitorias = await BuscarMonitorias.listarMonitorias();
+        const monitorias = await BuscarMonitorias.listarMonitorias(name,page);
         let favoritos = new Set();
 
         if(Auth.verificarCargo() !== 'visitante'){
@@ -50,6 +50,8 @@ async function renderizarMonitorias() {
                 })
             )
         );
+
+
     } catch (erro) {
         console.error("Erro ao carregar monitorias:", erro);
         listaMonitorias.textContent ="Não foi possível carregar as monitorias.";

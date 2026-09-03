@@ -39,8 +39,8 @@ export class MonitoringController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(RolesEnum.PROFESSOR, RolesEnum.ADMINISTRADOR)
   @Post()
-  createMonitoring(@Body() createMonitoringDto: CreateMonitoringDto) {
-    return this.monitoringService.createMonitoring(createMonitoringDto);
+  createMonitoring(@Body() createMonitoringDto: CreateMonitoringDto,@Request() request: Request) {
+    return this.monitoringService.createMonitoring(createMonitoringDto,request);
   }
 
   //SWAGGER

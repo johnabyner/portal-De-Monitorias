@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="GerenciarMonitoria.css">
 </head>
 
-<body>
+<body >
     <div id="navbar"></div>
 
-    <main>
+    <main class="main">
         <section id="gerenciar-monitoria">
 
             <a href="./monitorias.html" class="voltar">
@@ -32,9 +32,9 @@
             </div>
 
             <form class="formulario-monitoria" novalidate>
+                <span id="mensagem-monitoria"></span>
 
                 <div class="bloco-formulario">
-
                     <div class="titulo-bloco">
                         <h2>Informações da monitoria</h2>
                         <span>Preencha os dados da monitoria</span>
@@ -44,32 +44,48 @@
                         <label for="monitor">
                             Monitor <span class="opcional">(opcional)</span>
                         </label>
-
                         <input
                             type="text"
                             id="monitor"
                             name="monitor_matricula"
                             placeholder="Digite a matrícula do monitor"
                         >
+                        <span class="mensagem-erro"></span>
+                    </div>
 
+                    <div class="campo">
+                        <label for="nome">
+                            Nome 
+                        </label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite o nome da monitoria"
+                        >
                         <span class="mensagem-erro"></span>
                     </div>
 
                     <div class="campo">
                         <label for="disciplina">Disciplina</label>
-
-                        <select id="disciplina" name="disciplina_id" required>
-                            <option value="" selected disabled>
-                                Selecione uma disciplina
-                            </option>
-                        </select>
-
+                        <input
+                            type="text"
+                            id="disciplina"
+                            placeholder="Digite o nome da disciplina"
+                            autocomplete="off"
+                            required
+                        >
+                        <input
+                            type="hidden"
+                            id="disciplina_id"
+                            name="disciplina_id"
+                        >
+                        <div id="sugestoes-disciplinas"></div>
                         <span class="mensagem-erro"></span>
                     </div>
 
                     <div class="campo">
                         <label for="local">Local</label>
-
                         <input
                             type="text"
                             id="local"
@@ -77,25 +93,22 @@
                             placeholder="Ex: Sala 12"
                             required
                         >
-
                         <span class="mensagem-erro"></span>
                     </div>
 
                     <div class="campo">
                         <label for="descricao">Descrição</label>
-
                         <textarea
                             id="descricao"
                             name="descricao"
                             placeholder="Explique como funciona essa monitoria..."
                             rows="5"
-                            required
                         ></textarea>
-
                         <span class="mensagem-erro"></span>
                     </div>
 
                 </div>
+
 
                 <div class="bloco-formulario">
 
@@ -104,54 +117,121 @@
                         <span>Defina quando a monitoria acontecerá</span>
                     </div>
 
-                    <div class="horario">
+                    <div id="lista-horarios">
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Segunda-feira</label>
 
-                        <div class="campo">
-                            <label for="dia">Dia</label>
+                                <div class="horarios-input">
+                                    <input
+                                        type="time"
+                                        name="segunda_inicio"
+                                    >
 
-                            <select id="dia" name="dia" required>
-                                <option value="" selected disabled>
-                                    Selecione o dia
-                                </option>
-                                <option value="segunda">Segunda-feira</option>
-                                <option value="terca">Terça-feira</option>
-                                <option value="quarta">Quarta-feira</option>
-                                <option value="quinta">Quinta-feira</option>
-                                <option value="sexta">Sexta-feira</option>
-                            </select>
-                        </div>
+                                    <span>—</span>
 
-                        <div class="campo">
-                            <label>Horário</label>
+                                    <input
+                                        type="time"
+                                        name="segunda_fim"
+                                    >
+                                </div>
 
-                            <div class="horarios-input">
-                                <input
-                                    type="time"
-                                    id="horarioInicio"
-                                    name="horario_inicio"
-                                    required
-                                >
-
-                                <span>—</span>
-
-                                <input
-                                    type="time"
-                                    id="horarioFim"
-                                    name="horario_fim"
-                                    required
-                                >
+                                <span class="mensagem-erro"></span>
                             </div>
                         </div>
 
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Terça-feira</label>
+
+                                <div class="horarios-input">
+                                    <input
+                                        type="time"
+                                        name="terca_inicio"
+                                    >
+
+                                    <span>—</span>
+
+                                    <input
+                                        type="time"
+                                        name="terca_fim"
+                                    >
+                                </div>
+
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Quarta-feira</label>
+
+                                <div class="horarios-input">
+                                    <input
+                                        type="time"
+                                        name="quarta_inicio"
+                                    >
+
+                                    <span>—</span>
+
+                                    <input
+                                        type="time"
+                                        name="quarta_fim"
+                                    >
+                                </div>
+
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Quinta-feira</label>
+
+                                <div class="horarios-input">
+                                    <input
+                                        type="time"
+                                        name="quinta_inicio"
+                                    >
+
+                                    <span>—</span>
+
+                                    <input
+                                        type="time"
+                                        name="quinta_fim"
+                                    >
+                                </div>
+
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Sexta-feira</label>
+
+                                <div class="horarios-input">
+                                    <input
+                                        type="time"
+                                        name="sexta_inicio"
+                                    >
+
+                                    <span>—</span>
+
+                                    <input
+                                        type="time"
+                                        name="sexta_fim"
+                                    >
+                                </div>
+
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
                     </div>
-
-                    <button
-                        type="button"
-                        class="btn-adicionar-horario"
-                    >
-                        + Adicionar outro horário
-                    </button>
-
                 </div>
 
                 <div class="acoes-formulario">

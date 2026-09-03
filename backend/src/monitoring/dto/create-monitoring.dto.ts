@@ -11,12 +11,12 @@ export class CreateMonitoringDto {
   @IsNumber()
   readonly disciplina_id?: number;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Nome da monitoria.',
     example: 'algoritmos',
   })
   @IsString()
-  readonly nome?: string;
+  readonly nome!: string;
 
   @ApiPropertyOptional({
     description: 'Matrícula do monitor. Normalmente preenchida automaticamente após autenticação.',
@@ -26,15 +26,6 @@ export class CreateMonitoringDto {
   @IsString()
   @Transform(({ value }) => value?.trim())
   readonly monitor_matricula?: string;
-
-  @ApiProperty({
-    description: 'Matrícula do professor responsável pela monitoria.',
-    example: '2020987654',
-  })
-  @IsNotEmpty()
-  @IsString()
-  @Transform(({ value }) => value?.trim())
-  readonly professor_matricula?: string;
 
   @ApiPropertyOptional({
     description: 'Local onde a monitoria será realizada.',

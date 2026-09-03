@@ -1,17 +1,19 @@
-import { Transform } from "class-transformer";
-import { IsEmpty, IsNotEmpty, IsString } from "class-validator"
+import { Transform } from 'class-transformer';
+import { IsOptional, IsString } from 'class-validator';
 
-export class UpdateDisciplineDto{
-    @IsNotEmpty()
-    @IsString()
-    @Transform(({ value }) => value.trim())
-    professor_matricula
-    
-    @IsNotEmpty()
-    @IsString()
-    readonly curso?: string;
+export class UpdateDisciplineDto {
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) => value?.trim())
+  readonly professor_matricula?: string;
 
-    @IsNotEmpty()
-    @IsString()
-    readonly descricao?: string;
-};
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) => value?.trim())
+  readonly curso?: string;
+
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) => value?.trim())
+  readonly descricao?: string;
+}

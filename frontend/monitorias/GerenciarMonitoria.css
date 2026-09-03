@@ -1,15 +1,17 @@
 #gerenciar-monitoria {
     max-width: 850px;
     margin: 0 auto;
-    padding: 120px 50px;
+    padding: 110px 32px 80px;
 }
 
 .voltar {
-    display: inline-block;
-    margin-bottom: 25px;
-    color: #666;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 28px;
+    color: #777;
     font-size: 14px;
     text-decoration: none;
+    transition: color .2s;
 }
 
 .voltar:hover {
@@ -17,17 +19,19 @@
 }
 
 .cabecalho-gerenciar-monitoria {
-    margin-bottom: 35px;
+    margin-bottom: 36px;
 }
 
 .cabecalho-gerenciar-monitoria h1 {
     margin: 0;
     color: #292929;
-    font-size: 42px;
+    font-size: clamp(32px, 5vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -.8px;
 }
 
 .cabecalho-gerenciar-monitoria p {
-    margin: 8px 0 0;
+    margin: 10px 0 0;
     color: #777;
     font-size: 15px;
 }
@@ -35,36 +39,38 @@
 .formulario-monitoria {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 22px;
 }
 
 .bloco-formulario {
-    padding: 32px;
-    border: 2px solid #292929;
-    border-radius: 30px;
+    padding: 30px;
+    border: 1.5px solid #292929;
+    border-radius: 24px;
     background: #F3D8C7;
 }
 
 .titulo-bloco {
-    margin-bottom: 28px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid rgba(41, 41, 41, .25);
+    margin-bottom: 26px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(41, 41, 41, .18);
 }
 
 .titulo-bloco h2 {
     margin: 0;
     color: #292929;
-    font-size: 24px;
+    font-size: 21px;
+    font-weight: 600;
 }
 
 .titulo-bloco span {
     display: block;
-    margin-top: 4px;
-    color: #666;
+    margin-top: 5px;
+    color: #777;
     font-size: 13px;
 }
 
 .campo {
+    position: relative;
     margin-bottom: 20px;
 }
 
@@ -81,30 +87,38 @@
 }
 
 .opcional {
-    margin-left: 5px;
-    color: #777;
+    margin-left: 4px;
+    color: #888;
     font-weight: 400;
 }
 
 .campo input,
-.campo select,
 .campo textarea {
     width: 100%;
     box-sizing: border-box;
     padding: 12px 14px;
-    border: 2px solid #292929;
-    border-radius: 10px;
+    border: 1.5px solid #292929;
+    border-radius: 11px;
     outline: none;
-    background: #FFF;
+    background: #fff;
     color: #292929;
     font-family: "Poppins", sans-serif;
-    font-size: 15px;
+    font-size: 14px;
+    transition:
+        border-color .2s,
+        box-shadow .2s,
+        background .2s;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #aaa;
 }
 
 .campo input:focus,
-.campo select:focus,
 .campo textarea:focus {
     border-color: #89583D;
+    box-shadow: 0 0 0 3px rgba(137, 88, 61, .12);
 }
 
 .campo textarea {
@@ -112,114 +126,207 @@
     resize: vertical;
 }
 
-.campo select {
+/* =========================
+   AUTOCOMPLETE
+   ========================= */
+
+#sugestoes-disciplinas {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% - 20px);
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    border: 1.5px solid #292929;
+    border-radius: 11px;
+    background: #fff;
+
+    box-shadow: 0 10px 25px rgba(41, 41, 41, .12);
+}
+
+#sugestoes-disciplinas:empty {
+    display: none;
+}
+
+#sugestoes-disciplinas button {
+    display: block;
+    width: 100%;
+    padding: 11px 14px;
+    border: 0;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    color: #292929;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    text-align: left;
     cursor: pointer;
+    transition: background .15s;
+}
+
+#sugestoes-disciplinas button:last-child {
+    border-bottom: 0;
+}
+
+#sugestoes-disciplinas button:hover {
+    background: #F3D8C7;
+}
+
+/* =========================
+   HORÁRIOS
+   ========================= */
+
+#lista-horarios {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .horario {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 20px;
+    padding: 15px 16px;
+    border: 1px solid rgba(41, 41, 41, .15);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .35);
+}
+
+.horario .campo {
+    margin: 0;
+}
+
+.horario label {
+    margin-bottom: 9px;
+    font-size: 13px;
 }
 
 .horarios-input {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .horarios-input input {
-    flex: 1;
+    min-width: 0;
 }
 
 .horarios-input span {
-    color: #292929;
+    color: #777;
     font-weight: 600;
 }
 
-.btn-adicionar-horario {
-    width: auto;
-    padding: 10px 16px;
-    border: 2px solid #292929;
-    border-radius: 10px;
-    background: transparent;
-    color: #292929;
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
+/* =========================
+   VALIDAÇÃO
+   ========================= */
+
+.campo input.invalido,
+.campo textarea.invalido {
+    border-color: #E74C3C;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, .08);
 }
 
-.btn-adicionar-horario:hover {
-    background: #292929;
-    color: #FFF;
-}
-
-.acoes-formulario {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 12px;
-}
-
-.btn-cancelar,
-.btn-criar {
-    padding: 12px 22px;
-    border: 2px solid #292929;
-    border-radius: 10px;
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.btn-cancelar {
-    color: #292929;
-    background: #FFF;
-    text-decoration: none;
-}
-
-.btn-cancelar:hover {
-    background: #EEE;
-}
-
-.btn-criar {
-    padding: 13px 24px;
-    background: #A66F4F;
-    color: #FFF;
-}
-
-.btn-criar:hover {
-    background: #89583D;
-    box-shadow: 0 4px 0 #292929;
+.campo input.valido,
+.campo textarea.valido {
+    border-color: #64b85c;
 }
 
 .mensagem-erro {
     display: none;
     margin-top: 6px;
-    color: #E74C3C;
-    font-size: 13px;
+    color: #D94335;
+    font-size: 12px;
 }
 
 .campo.erro .mensagem-erro {
     display: block;
 }
 
-@media (max-width: 768px) {
-    #gerenciar-monitoria {
-        padding: 100px 24px;
-    }
+#mensagem-monitoria {
+    display: block;
+    font-size: 14px;
+}
 
-    .cabecalho-gerenciar-monitoria h1 {
-        font-size: 32px;
+.mensagemServidorSucesso {
+    color: #4e9f48;
+}
+
+.mensagemServidorErro {
+    color: #D94335;
+}
+
+/* =========================
+   AÇÕES
+   ========================= */
+
+.acoes-formulario {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-cancelar,
+.btn-criar {
+    padding: 11px 20px;
+    border: 1.5px solid #292929;
+    border-radius: 11px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform .15s,
+        background .2s,
+        box-shadow .2s;
+}
+
+.btn-cancelar {
+    background: #fff;
+    color: #292929;
+    text-decoration: none;
+}
+
+.btn-cancelar:hover {
+    background: #f3f3f3;
+}
+
+.btn-criar {
+    background: #A66F4F;
+    color: #fff;
+}
+
+.btn-criar:hover {
+    background: #89583D;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 #292929;
+}
+
+.btn-criar:active,
+.btn-cancelar:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* =========================
+   RESPONSIVO
+   ========================= */
+
+@media (max-width: 600px) {
+    #gerenciar-monitoria {
+        padding: 90px 18px 50px;
     }
 
     .bloco-formulario {
-        padding: 24px;
+        padding: 22px;
+        border-radius: 20px;
+    }
+
+    .cabecalho-gerenciar-monitoria {
+        margin-bottom: 28px;
     }
 
     .horario {
-        grid-template-columns: 1fr;
+        padding: 13px;
     }
 
     .acoes-formulario {

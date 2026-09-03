@@ -8,21 +8,28 @@ import { RolesEnum } from '../auth/enums/Roles.enum';
 export class MonitoringService {
   constructor(private readonly monitoringRepository: MonitoringRepository){}
 
-  async createMonitoring(createMonitoringDto: CreateMonitoringDto) {
+  async createMonitoring(createMonitoringDto: CreateMonitoringDto,request:Request) {
+    // Professor autenticado
+    const usuario = request['user'];
+    const professorMatricula = usuario.sub;
+
     //verificar disciplina
     const existsDiscipline = await this.monitoringRepository.findByIdDiscipline(createMonitoringDto.disciplina_id!);
     if(!existsDiscipline) throw new NotFoundException('Disciplina nao encontrada');
+
     //verificar monitor
     if(createMonitoringDto.monitor_matricula){
       const monitorIsValid = await this.monitoringRepository.findByRegistration(createMonitoringDto.monitor_matricula!);
       if(!monitorIsValid) throw new NotFoundException('Monitor nao encontrado');
     }
+
     //verificar professor
-    const existsTeacher = await this.monitoringRepository.findByRegistration(createMonitoringDto.professor_matricula!);
+    const existsTeacher = await this.monitoringRepository.findByRegistration(professorMatricula!);
     if(!existsTeacher) throw new NotFoundException('Professor nao encontrado');
 
-    const result = await this.monitoringRepository.createMonitoring(createMonitoringDto);
-    return {message: 'monitoria criado com sucesso', result};
+    const result = await this.monitoringRepository.createMonitoring(createMonitoringDto, professorMatricula);
+    console.log(result)
+    return {message: 'monitoria criado com sucesso',result};
   }
 
   async findAllMonitoring(page: number) {
@@ -59,7 +66,7 @@ export class MonitoringService {
     }
 
     const result = await this.monitoringRepository.findMyMonitoring(registration,page, column);
-    return {message:'monitorias encontradas com sucesso', result}
+    return {message:'monitorias encontradas com sucesso',result}
   }
 
   async updateMonitoring(id: number, updateMonitoringDto: UpdateMonitoringDto, user: any) {

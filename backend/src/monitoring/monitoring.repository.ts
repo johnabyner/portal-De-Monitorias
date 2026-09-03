@@ -7,7 +7,7 @@ import { UpdateMonitoringDto } from "./dto/update-monitoring.dto";
 export class MonitoringRepository{
     constructor(private readonly db:DatabaseService){}
 
-    async createMonitoring(createMonitoringDto: CreateMonitoringDto){
+    async createMonitoring(createMonitoringDto: CreateMonitoringDto, professorMatricula: string){
         const result = await this.db.query(
             `INSERT INTO monitorias
             (disciplina_id,
@@ -17,10 +17,11 @@ export class MonitoringRepository{
              local,
              descricao,
              status)
-            VALUES($1,$7,$2,$3,$4,$5,$6);`,
+            VALUES($1,$7,$2,$3,$4,$5,$6)
+            RETURNING id;`,
             [   createMonitoringDto.disciplina_id,
                 createMonitoringDto.monitor_matricula ?? null,
-                createMonitoringDto.professor_matricula,
+                professorMatricula,
                 createMonitoringDto.local ?? null,
                 createMonitoringDto.descricao ?? null,
                 createMonitoringDto.status ?? 'ATIVA',
@@ -60,6 +61,7 @@ export class MonitoringRepository{
                 SELECT
                     m.id,
                     d.curso,
+                    m.nome,
                     monitor.nome AS monitor_nome,
                     professor.nome AS professor_nome,
                     m.local,
@@ -106,6 +108,7 @@ export class MonitoringRepository{
                 SELECT
                     m.id,
                     d.curso,
+                    m.nome,
                     monitor.nome AS monitor_nome,
                     professor.nome AS professor_nome,
                     m.local,

@@ -1,6 +1,8 @@
+import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "../database/database.service";
 import { UpdateDisciplineDto } from "./dto/update-discipline.dto";
 
+@Injectable()
 export class DisciplinesRepository{
     constructor(private readonly db: DatabaseService){}
 
@@ -12,7 +14,7 @@ export class DisciplinesRepository{
         return result.rows[0];
     }
 
-    async findAllDisciplines(page: number){
+    async findAllDisciplines(){
         const result = await this.db.query(
             `SELECT 
                 d.id, 
@@ -20,14 +22,13 @@ export class DisciplinesRepository{
                 d.curso, 
                 d.descricao 
              FROM disciplinas d  
-             JOIN users u
-             on d.professor_matricula = u.matricula
-             OFFSET $1 LIMIT  20;`,
-            [page]
+             LEFT JOIN users u
+             on d.professor_matricula = u.matricula;`
+
         )
         return result.rows;
     }
-    async findDiscipline(query:string,page:number){
+    async findDiscipline(query:string){
         const result = await this.db.query(
             `SELECT 
                 d.id,
@@ -35,16 +36,30 @@ export class DisciplinesRepository{
                 d.curso,
                 d.descricao
              FROM disciplinas d
-             JOIN users u
+             LEFT JOIN users u
              on d.professor_matricula = u.matricula
-             WHERE curso LIKE $1
-             OFFSET $2 LIMIT  20;
+             WHERE curso ILIKE $1;
             `,
             [
-                `%${query}%`, page
+                `%${query}%`
             ]
         )
         return result.rows;
+    }
+
+    async findById(id: number) {
+        const result = await this.db.query(
+            `SELECT 
+                id,
+                professor_matricula,
+                curso,
+                descricao
+            FROM disciplinas
+            WHERE id = $1;`,
+            [id]
+        );
+
+        return result.rows[0];
     }
 
     async updateDiscipline(discipline: UpdateDisciplineDto,id: number){

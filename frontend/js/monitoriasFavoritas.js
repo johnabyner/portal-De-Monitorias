@@ -5,14 +5,14 @@ import { criarCardMonitoria } from "./cardMonitoria.js";
 const listaMonitorias = document.querySelector(".lista-monitorias");
 
 //renderizando nosso card
-async function renderizarMonitorias(){
+async function renderizarMonitorias(page = 0){
     try{
         if(Auth.verificarCargo() === 'visitante'){
             listaMonitorias.textContent = "Funcionalidade apenas para usuarios cadastrados";
             return;
         }
 
-        const monitorias = await BuscarMonitoriasFavoritas.listarMonitoriasFavoritas();
+        const monitorias = await BuscarMonitoriasFavoritas.listarMonitoriasFavoritas(page);
         if(!monitorias?.length){
             listaMonitorias.textContent = "Sem Monitorias favoritadas, tente clicar na estrela";
             return;

@@ -8,11 +8,9 @@ function validarCampo(campo) {
     const container = campo.closest(".campo");
     const mensagem = container.querySelector(".mensagem-erro");
 
-
     if (!campo.checkValidity()) {
         campo.classList.remove("valido");
         campo.classList.add("invalido");
-
 
         if (campo.validity.valueMissing) {
             mensagem.textContent = "Este campo é obrigatório.";
@@ -24,8 +22,7 @@ function validarCampo(campo) {
             mensagem.textContent = campo.title;
         }
         else if (campo.validity.tooShort) {
-            mensagem.textContent =
-                `Digite pelo menos ${campo.minLength} caracteres.`;
+            mensagem.textContent =`Digite pelo menos ${campo.minLength} caracteres.`;
         }
 
         return false;
@@ -37,7 +34,6 @@ function validarCampo(campo) {
     mensagem.textContent = "";
 
     return true;
-
 }
 /*
   Validação enquanto digita
