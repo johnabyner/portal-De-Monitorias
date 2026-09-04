@@ -43,7 +43,7 @@ class BuscarMonitorias{
         const offset = page*20;
 
         try{
-            const resposta = await Auth.fetchAuth(`${url}/monitoring/me?page{offset}`);
+            const resposta = await Auth.fetchAuth(`${url}/monitoring/me?page=${offset}`);
 
             if(!resposta.ok){
                 throw new Error(`Erro ao listar monitorias: ${resposta.status}`);
@@ -75,7 +75,7 @@ class BuscarMonitorias{
     static async deletarMonitoria(id){
         const url = 'http://localhost:7777'
         try{
-            const resposta = await Auth.fetchAuth(`${url}/monitoring/{id}`, {method:'DELETE'})
+            const resposta = await Auth.fetchAuth(`${url}/monitoring/${id}`, {method:'DELETE'})
             return resposta;
         }catch(err){
             console.error('Erro em deletar monitoria', err)

@@ -16,6 +16,7 @@
         descricao,
         status,
         horarios,
+        nome,
         favoritado = false
     }){
         const card = document.createElement("article"); //pq article
@@ -25,7 +26,7 @@
 
         card.innerHTML = `
             <div class="card-header">
-                <h2>${curso}</h2>
+                <h2>${nome}</h2>
 
                 <button
                     class="favorito ${favoritado ? "ativo" : ""}"
@@ -41,14 +42,10 @@
             </div>
 
             <div class="informacoes-monitor">
-                <p>Monitor: ${monitor_nome ?? "Não definido"}</p>
+                <p>Disciplina: ${curso ?? "Não definido"}</p>
                 <p>Professor: ${professor_nome ?? "Não definido"}</p>
+                <p>Monitor: ${monitor_nome ?? "Não definido"}</p>
                 <p>Local: ${local}</p>
-                <p>Status: ${status}</p>
-            </div>
-
-            <div>
-                <p>Descrição: ${descricao}</p>
             </div>
 
             <div class="card-expandido"></div>

@@ -1,0 +1,65 @@
+.configuracoes {
+    width: min(90%, 600px);
+    min-height: 400px;
+    padding: 48px;
+    gap: 24px;
+}
+
+.configuracoes .title-formulario h2 {
+    font-size: 2rem;
+}
+
+.acoes-configuracoes {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 32px;
+}
+
+.acoes-configuracoes button,
+.acoes-configuracoes a {
+    width: 100%;
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+}
+
+.btn-monitorias {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    color: #A66F4F;
+    border: 2px solid #A66F4F;
+    border-radius: 8px;
+    background-color: transparent;
+    text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.2;
+    appearance: none;
+}
+
+.btn-monitorias:hover {
+    background-color: #F3D8C7;
+}
+
+.confirmacao-exclusao {
+    position: fixed;
+    inset: 0;
+    width: min(90%, 600px);
+    margin: auto;
+    padding: 48px;
+    border: none;
+}
+
+.confirmacao-exclusao::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.confirmacao-exclusao .title-formulario h2 {
+    font-size: 2rem;
+    text-align: center;
+}

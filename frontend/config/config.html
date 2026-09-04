@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portal de Monitorias</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="config.css">
+</head>
+
+<body class="cadastro">
+    <div id="navbar"></div>
+
+    <section class="formulario-cadastro configuracoes">
+        <div class="title-formulario">
+            <h2>Configurações</h2>
+        </div>
+
+        <div class="acoes-configuracoes">
+            <a href="alterar.html" id="editar-conta" class="btn-monitorias">Editar conta</a>
+            <button type="button" id="excluir-conta" class="btn-monitorias">Excluir conta</button>
+        </div>
+    </section>
+
+    <dialog class="formulario-cadastro confirmacao-exclusao" id="confirmacao-exclusao">
+        <div class="title-formulario">
+            <h2>Confirmar exclusão da conta?</h2>
+        </div>
+
+        <div class="acoes-configuracoes">
+            <button type="button" class="btn-monitorias">Confirmar</button>
+            <button type="button" class="btn-monitorias" id="sair-confirmacao">Sair</button>
+        </div>
+    </dialog>
+
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/config.js"></script>
+</body>
+</html>

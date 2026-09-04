@@ -50,6 +50,7 @@ export class FavoritesRepository{
             `
             SELECT
                 m.id,
+                m.nome,
                 d.curso ,
                 u_monitor.nome AS monitor_nome,
                 u_professor.nome AS professor_nome,
@@ -89,6 +90,7 @@ export class FavoritesRepository{
 
             GROUP BY 
                 m.id,
+                m.nome,
                 d.curso,
                 monitor_nome,
                 professor_nome,
@@ -108,6 +110,7 @@ export class FavoritesRepository{
             `
             SELECT
                 m.id,
+                m.nome,
                 d.curso,
                 u_monitor.nome AS monitor_nome,
                 u_professor.nome AS professor_nome,
@@ -146,6 +149,7 @@ export class FavoritesRepository{
 
             GROUP BY 
                 m.id,
+                m.nome,
                 d.curso,
                 monitor_nome,
                 professor_nome,

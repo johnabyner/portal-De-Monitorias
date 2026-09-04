@@ -90,6 +90,7 @@ export class MonitoringRepository{
 
                 GROUP BY 
                     m.id,
+                    m.nome,
                     d.curso,
                     monitor_nome,
                     professor_nome,
@@ -130,12 +131,13 @@ export class MonitoringRepository{
                 LEFT JOIN users monitor
                     on m.monitor_matricula = monitor.matricula
                 LEFT JOIN users professor
-                    on m.monitor_matricula = professor.matricula
+                    on m.professor_matricula = professor.matricula
                 LEFT JOIN horarios h
                     on h.monitoria_id = m.id
                 WHERE d.curso ILIKE $1 AND m.status = 'ATIVA'
                 GROUP BY
                     m.id,
+                    m.nome,
                     d.curso,
                     monitor_nome,
                     professor_nome,
@@ -151,10 +153,33 @@ export class MonitoringRepository{
     async findMyMonitoring(registration: string, page: number, column: string){
         const result = await this.db.query(
             `
-            SELECT * FROM monitorias 
-            WHERE ${column} = $1
-            OFFSET $2
-            LIMIT 20
+                SELECT
+                    m.id,
+                    d.curso,
+                    m.nome,
+                    monitor.nome AS monitor_nome,
+                    professor.nome AS professor_nome,
+                    m.local,
+                    m.descricao,
+                    m.status
+                FROM monitorias m
+                JOIN disciplinas d
+                    on m.disciplina_id = d.id
+                LEFT JOIN users monitor
+                    on m.monitor_matricula = monitor.matricula
+                LEFT JOIN users professor
+                    on m.professor_matricula = professor.matricula
+                WHERE m.${column} = $1
+                GROUP BY
+                    m.id,
+                    d.curso,
+                    monitor_nome,
+                    professor_nome,
+                    m.local,
+                    m.descricao,
+                    m.status
+                OFFSET $2
+                LIMIT 20
             `,[registration, page]
         ) 
         return result.rows

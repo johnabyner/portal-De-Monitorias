@@ -1,0 +1,154 @@
+#monitorias {
+    padding: 120px 50px;
+}
+
+#monitorias h1 {
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 48px;
+    color: #292929;
+}
+
+.lista-monitorias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin: 0 auto;
+}
+
+.card-monitoria {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    padding: 25px;
+    border: 2px solid #292929;
+    border-radius: 30px;
+    background-color: #F3D8C7;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-monitoria:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 22px;
+    color: #292929;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #292929;
+}
+
+.status span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #292929;
+}
+
+.status.ativa span {
+    background-color: #4CAF50;
+}
+
+.status.inativa span {
+    background-color: #C94C4C;
+}
+
+.informacoes-monitor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 25px 0;
+}
+
+.card-monitoria p {
+    margin: 0;
+    font-size: 16px;
+    color: #292929;
+}
+
+.acoes-monitoria {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.acoes-monitoria button {
+    padding: 9px 14px;
+    border: 2px solid #292929;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #292929;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.acoes-monitoria button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 0 #292929;
+}
+
+.acoes-monitoria .desativar {
+    background-color: #E8C7B5;
+}
+
+.acoes-monitoria .detalhes {
+    background-color: #292929;
+    color: #F3D8C7;
+}
+
+@media (max-width: 1100px) {
+    .lista-monitorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #monitorias {
+        padding: 100px 24px;
+    }
+
+    #monitorias h1 {
+        font-size: 36px;
+    }
+
+    .lista-monitorias {
+        grid-template-columns: 1fr;
+    }
+
+    .card-monitoria {
+        min-height: 200px;
+    }
+
+    .card-header h2 {
+        font-size: 20px;
+    }
+
+    .acoes-monitoria button {
+        flex: 1;
+    }
+}

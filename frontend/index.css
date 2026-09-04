@@ -4,4 +4,5 @@
 @import url(login/login.css);
 @import url(monitorias/monitorias.css);
 @import url(home/home.css);
-@import url(components/navbar.css)
+@import url(components/navbar.css);
+@import url(config/config.css);

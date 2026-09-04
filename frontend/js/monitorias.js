@@ -25,6 +25,28 @@ botaoCriarMonitoria.addEventListener('click', ()=>{
     window.location.href = "./criarMonitoria.html";
 })
 
+// function renderizarPaginacao(monitorias, favoritos, paginaAtual) {
+//     const totalPaginas = Math.ceil(monitorias.length / monitoriasPorPagina);
+
+//     paginacaoMonitorias.replaceChildren(
+//         ...Array.from({ length: totalPaginas }, (_, indice) => {
+//             const pagina = indice + 1;
+//             const botao = document.createElement("button");
+
+//             botao.type = "button";
+//             botao.textContent = pagina;
+//             botao.setAttribute("aria-label", `Ir para a página ${pagina}`);
+//             botao.setAttribute("aria-current", pagina === paginaAtual ? "page" : "false");
+//             botao.disabled = pagina === paginaAtual;
+//             botao.addEventListener("click", () => {
+//                 renderizarPagina(monitorias, favoritos, pagina);
+//             });
+
+//             return botao;
+//         })
+//     );
+// }
+
 //vai renderizar as monitorias
 async function renderizarMonitorias(page = 0,name ='') {
     try {

@@ -58,11 +58,8 @@ export class MonitoringService {
     let column: string;
     if(role === RolesEnum.MONITOR) {
       column = 'monitor_matricula'
-    }else if(role === RolesEnum.PROFESSOR){
-      column = 'professor_matricula'
     }else{
-      //para o administrador
-      return {message:'adminstrador precisa criar monitorias?'}      
+      column = 'professor_matricula'
     }
 
     const result = await this.monitoringRepository.findMyMonitoring(registration,page, column);

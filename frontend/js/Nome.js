@@ -15,3 +15,5 @@ class Nome{
 }
 
 export default Nome
+
+// I am nothing more than a weak and heavy burden.

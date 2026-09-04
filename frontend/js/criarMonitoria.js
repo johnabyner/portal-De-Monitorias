@@ -15,9 +15,16 @@ import BuscarDisciplinas from './BuscarDisciplinas.js';
 import {validarCampo,validarFormulario,limparValidacoes} from './validacaoFormulario.js';
 import {obterHorarios} from './horariosMonitoria.js';
 
+const cargo = Auth.verificarCargo();
+if (cargo !== 'PROFESSOR' && cargo !== 'ADMINISTRADOR') {
+    window.location.href = './monitorias.html';
+    throw new Error('Acesso não autorizado.');
+}
+
+//monitoria
 const formulario = document.querySelector('.formulario-monitoria');
 const mensagemMonitoria = document.querySelector('#mensagem-monitoria');
-
+//disciplinas
 const inputDisciplina = document.querySelector('#disciplina');
 const inputDisciplinaId = document.querySelector('#disciplina_id');
 const sugestoesDisciplinas = document.querySelector('#sugestoes-disciplinas');
