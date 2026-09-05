@@ -3,6 +3,7 @@ import { CreateMonitoringDto } from './dto/create-monitoring.dto';
 import { UpdateMonitoringDto } from './dto/update-monitoring.dto';
 import { MonitoringRepository } from './monitoring.repository';
 import { RolesEnum } from '../auth/enums/Roles.enum';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @Injectable()
 export class MonitoringService {
@@ -68,14 +69,15 @@ export class MonitoringService {
 
   async updateMonitoring(id: number, updateMonitoringDto: UpdateMonitoringDto, user: any) {
     //verificar se existe essa monitoria cadastrada
-    const monitoringExists = await this.monitoringRepository.findById(id);
+    const monitoringExists = await this.monitoringRepository.findByIdStatus(id);
     if(!monitoringExists) throw new NotFoundException('Nao existe essa monitoria');
+
 
     if(user.role  === RolesEnum.MONITOR){
       //se nao for correspondente com a matricula do monitor da monitoria
       if(monitoringExists.monitor_matricula !== user.sub){
         throw new ForbiddenException("Voce nao pode editar essa monitoria");
-      }
+      } 
 
       //monitor so pode alterar isso
       updateMonitoringDto = {
@@ -84,17 +86,29 @@ export class MonitoringService {
       }
     }
 
+    const oldMonitor = monitoringExists.monitor_matricula;
+    const newMonitor = updateMonitoringDto.monitor_matricula;
+
     //vai retornar, professores e administradores chegam aqui
     const result = await this.monitoringRepository.updateMonitoring(id,updateMonitoringDto);
+    //se existir e for diferente do antigo
+    if(newMonitor && newMonitor !== oldMonitor){
+      //novo vira monitor
+      await this.monitoringRepository.becomeAMonitor(newMonitor)
+      //antigo vira aluno se nao houver monitorias
+      if(oldMonitor){
+        await this.monitoringRepository.verifyIfTheMonitorWillBeAStudentAgain(oldMonitor)
+      }
+    }
     return {message: 'monitoria editada com sucesso', result};
   }
 
-  async disableMonitoring(id: number) {
+  async toggleMonitoringStatus(id: number, updateStatusDto: UpdateStatusDto) {
     //verificar se existe essa monitoria cadastrada
     const monitoringExists = await this.monitoringRepository.findById(id);
     if(!monitoringExists) throw new NotFoundException('Nao existe essa monitoria');
 
-    const result = await this.monitoringRepository.disableMonitoring(id);
+    const result = await this.monitoringRepository.toggleMonitoringStatus(id, updateStatusDto);
 
     return {message: 'monitoria deletada com sucesso', result};
   }

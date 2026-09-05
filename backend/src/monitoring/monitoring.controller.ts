@@ -7,6 +7,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { RolesEnum } from '../auth/enums/Roles.enum';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { UpdateStatusDto } from './dto/update-status.dto';
 
 @ApiTags('monitoring') //swagger
 @Controller('monitoring')
@@ -97,18 +98,20 @@ export class MonitoringController {
   updateMonitoring(@Param('id', ParseIntPipe) id: number, @Body() updateMonitoringDto: UpdateMonitoringDto, @Request() request) {
     return this.monitoringService.updateMonitoring(id, updateMonitoringDto, request.user);
   }
+
+  // /monitoring/:id/status
   
   //SWAGGER
   @ApiBearerAuth()
-  @ApiOperation({summary: 'Deletar monitoria'})
+  @ApiOperation({summary: 'Trocar status monitoria'})
   @ApiBearerAuth()
   @ApiParam({name:'id', example:1})
-  //DELETE
+  //monitoring/:id/status
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(RolesEnum.PROFESSOR, RolesEnum.ADMINISTRADOR)  
-  @Delete(':id')
-  disableMonitoring(@Param('id', ParseIntPipe) id: number) {
-    return this.monitoringService.disableMonitoring(id);
+  @Patch(':id/status')
+  toggleMonitoringStatus(@Param('id', ParseIntPipe) id: number, @Body() updateStatusDto: UpdateStatusDto) {
+    return this.monitoringService.toggleMonitoringStatus(id, updateStatusDto);
   }
 }
 

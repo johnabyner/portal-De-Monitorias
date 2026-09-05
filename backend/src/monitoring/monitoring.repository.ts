@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { DatabaseService } from "../database/database.service";
 import { CreateMonitoringDto } from "./dto/create-monitoring.dto";
 import { UpdateMonitoringDto } from "./dto/update-monitoring.dto";
+import { UpdateStatusDto } from "./dto/update-status.dto";
 
 @Injectable()
 export class MonitoringRepository{
@@ -28,8 +29,44 @@ export class MonitoringRepository{
                 createMonitoringDto.nome
             ]
         )
+
+        // transforma o aluno em monitor
+        if(createMonitoringDto.monitor_matricula){
+            this.becomeAMonitor(createMonitoringDto.monitor_matricula)
+        }   
+        return result.rows[0]
+    }
+
+    async becomeAMonitor(registration: string) {
+        const result = await this.db.query(
+            `
+            UPDATE users
+            SET role = 'monitor'
+            WHERE matricula = $1
+            AND role = 'aluno'
+            `,
+            [registration]
+        );
+        return result.rows[0]
+    }
+    async verifyIfTheMonitorWillBeAStudentAgain(registration: string){
+        const result = await this.db.query(
+        `
+        UPDATE users
+        SET role = 'aluno'
+        WHERE matricula = $1
+        AND NOT EXISTS (
+            SELECT 1
+            FROM monitorias
+            WHERE monitor_matricula = $1
+        )
+        `,
+        [registration]
+        );
         return result.rows[0];
     }
+
+
     async findByIdDiscipline(id: number){
         const result = await this.db.query(
             `
@@ -50,6 +87,14 @@ export class MonitoringRepository{
         const result = await this.db.query(
             `
                 SELECT * FROM monitorias WHERE id = $1;
+            `,[id]
+        )
+        return result.rows[0];
+    }
+    async findByIdStatus(id: number){
+        const result = await this.db.query(
+            `
+                SELECT * FROM monitorias WHERE id = $1 AND status = 'ATIVA';
             `,[id]
         )
         return result.rows[0];
@@ -158,6 +203,7 @@ export class MonitoringRepository{
                     d.curso,
                     m.nome,
                     monitor.nome AS monitor_nome,
+                    m.monitor_matricula,
                     professor.nome AS professor_nome,
                     m.local,
                     m.descricao,
@@ -174,6 +220,7 @@ export class MonitoringRepository{
                     m.id,
                     d.curso,
                     monitor_nome,
+                    monitor_matricula,
                     professor_nome,
                     m.local,
                     m.descricao,
@@ -182,7 +229,8 @@ export class MonitoringRepository{
                 LIMIT 20
             `,[registration, page]
         ) 
-        return result.rows
+        return result.rows;
+
     }
 
     async updateMonitoring(id: number,updateMonitoringDto: UpdateMonitoringDto){
@@ -190,6 +238,7 @@ export class MonitoringRepository{
             ` 
                 UPDATE monitorias
                 SET
+                    nome = COALESCE($7, nome),
                     disciplina_id = COALESCE($2,disciplina_id),
                     monitor_matricula = COALESCE($3,monitor_matricula),
                     local = COALESCE($4,local),
@@ -203,19 +252,20 @@ export class MonitoringRepository{
                 updateMonitoringDto.local ?? null,
                 updateMonitoringDto.descricao ?? null,
                 updateMonitoringDto.status ?? null,
+                updateMonitoringDto.nome ?? null,
             ]
         )
         return result.rows[0];
     }
 
-    async disableMonitoring(id: number) {
+    async toggleMonitoringStatus(id: number, updateStatusDto: UpdateStatusDto) {
         const result = await this.db.query(
             `
             UPDATE monitorias
-            SET status = 'DESATIVADA'
+            SET status = $2
             WHERE id = $1
             `,
-            [id]
+            [id, updateStatusDto.status]
         );
 
         return result.rows[0];

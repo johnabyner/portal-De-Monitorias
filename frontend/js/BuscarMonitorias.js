@@ -48,12 +48,13 @@ class BuscarMonitorias{
             if(!resposta.ok){
                 throw new Error(`Erro ao listar monitorias: ${resposta.status}`);
             }
-
-            return resposta;
+            const dados = await resposta.json()
+            return {resposta , dados};
         }catch(err){
             console.error('Erro em listar minhas monitorias', err)
         }
     }
+ 
 
     static async editarMonitorias(monitoria, id){
         const url = 'http://localhost:7777'
@@ -66,17 +67,25 @@ class BuscarMonitorias{
                 },
                 body: JSON.stringify(monitoria)
             })
-
-            return resposta;
+            const dados = await resposta.json()
+            return {resposta, dados};
         }catch(err){
             console.error('Erro em editar monitoria', err);
         }
     }
-    static async deletarMonitoria(id){
+    static async trocarStatusMonitoria(id, status){
         const url = 'http://localhost:7777'
         try{
-            const resposta = await Auth.fetchAuth(`${url}/monitoring/${id}`, {method:'DELETE'})
-            return resposta;
+            const resposta = await Auth.fetchAuth(`${url}/monitoring/${id}/status`, {
+                method:'PATCH',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({status})
+            })
+            const dados = await resposta.json()
+
+            return {resposta , dados};
         }catch(err){
             console.error('Erro em deletar monitoria', err)
         }

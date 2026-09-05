@@ -6,6 +6,7 @@ import { Status } from '../enums/Status.enum';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateMonitoringDto extends PartialType(CreateMonitoringDto) {
+
     @ApiProperty({
         description: 'ID da disciplina',
         example: 1
@@ -15,11 +16,19 @@ export class UpdateMonitoringDto extends PartialType(CreateMonitoringDto) {
     readonly disciplina_id? : number;
 
     @ApiPropertyOptional({
+        description: 'Nome da monitoria',
+        example: 'Monitoria de Sociologia'
+    })
+    @IsString()
+    @Transform(({value}) => value?.trim())
+    readonly nome?: string;
+
+    @ApiPropertyOptional({
         description: 'Matricula do monitor',
         example: '20230001'
     })
     @IsString()
-    @Transform(({value})=> value.trim())
+    @Transform(({value})=> value?.trim())
     readonly monitor_matricula?: string;
 
     @ApiPropertyOptional({
@@ -36,13 +45,5 @@ export class UpdateMonitoringDto extends PartialType(CreateMonitoringDto) {
     @IsString()
     readonly descricao?: string;
 
-    @ApiPropertyOptional({
-        description: 'Status da monitoria',
-        enum: Status,
-        example: 'ATIVA'
-    })
-    @Transform(({value})=> value.toUpperCase())
-    @IsEnum(Status)
-    @IsString()
-    readonly status?: string;
+
 }

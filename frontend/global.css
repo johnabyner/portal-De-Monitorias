@@ -22,6 +22,10 @@
     --semantic-error: #DC2626;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 body {
     
     font: var(--text);

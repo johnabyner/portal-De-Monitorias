@@ -11,8 +11,8 @@ class BuscarHorarios{
                 },
                 body:JSON.stringify(horario)
             });
-            const dados = await dados.json();
-            return {ok:resposta, dados};
+            const dados = await resposta.json();
+            return {resposta, dados};
         }catch(err){
             console.error('Erro em cadastrar horario',err);
         }
@@ -25,6 +25,7 @@ class BuscarHorarios{
             const resposta = await fetch(`${url}/schedules?page=${offset}&name=${name}`);
             if(!resposta.ok)throw new Error(`Erro ao listar horarios: ${resposta.status}`);
             const dados = await resposta.json();
+            console.log(dados.result)
             return dados.result;
         }catch(err){
             console.error('Erro em listar horarios',err);
@@ -41,6 +42,7 @@ class BuscarHorarios{
                 },
                 body:JSON.stringify(horario)
             });
+
             return resposta;
         }catch(err){
             console.error('Erro em editar horario',err);

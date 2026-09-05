@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Monitoria | Portal de Monitorias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="../components/navbar.css">
+    <link rel="stylesheet" href="GerenciarMonitoria.css">
+</head>
+<body>
+    <div id="navbar"></div>
+    <main class="main">
+        <section id="gerenciar-monitoria">
+            <a href="./minhasMonitorias.html" class="voltar">← Voltar para minhas monitorias</a>
+            
+            <div class="cabecalho-gerenciar-monitoria">
+                <h1>Editar monitoria</h1>
+                <p>Altere os dados da monitoria.</p>
+            </div>
+
+            <form class="formulario-monitoria" novalidate>
+                <span id="mensagem-monitoria"></span>
+
+                <div class="bloco-formulario">
+                    <div class="titulo-bloco">
+                        <h2>Informações da monitoria</h2>
+                        <span>Altere os dados necessários</span>
+                    </div>
+
+                    <div class="campo campo-professor">
+                        <label for="monitor">Monitor <span class="opcional">(opcional)</span></label>
+                        <input type="text" id="monitor" name="monitor_matricula" placeholder="Digite a matrícula do monitor">
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                    <div class="campo campo-professor">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite o nome da monitoria" required>
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                    <div class="campo campo-professor">
+                        <label for="disciplina">Disciplina</label>
+                        <input type="text" id="disciplina" placeholder="Digite o nome da disciplina" autocomplete="off" required>
+                        <input type="hidden" id="disciplina_id" name="disciplina_id">
+                        <div id="sugestoes-disciplinas"></div>
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="local">Local</label>
+                        <input type="text" id="local" name="local" placeholder="Ex: Sala 12" required>
+                        <span class="mensagem-erro"></span>
+                    </div>
+
+                    <div class="campo">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" name="descricao" placeholder="Explique como funciona essa monitoria..." rows="5"></textarea>
+                        <span class="mensagem-erro"></span>
+                    </div>
+                </div>
+
+                <div class="bloco-formulario">
+                    <div class="titulo-bloco">
+                        <h2>Horários</h2>
+                        <span>Defina quando a monitoria acontecerá</span>
+                    </div>
+
+                    <div id="lista-horarios">
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Segunda-feira</label>
+                                <div class="horarios-input">
+                                    <input type="time" name="segunda_inicio">
+                                    <span>—</span>
+                                    <input type="time" name="segunda_fim">
+                                </div>
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Terça-feira</label>
+                                <div class="horarios-input">
+                                    <input type="time" name="terca_inicio">
+                                    <span>—</span>
+                                    <input type="time" name="terca_fim">
+                                </div>
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Quarta-feira</label>
+                                <div class="horarios-input">
+                                    <input type="time" name="quarta_inicio">
+                                    <span>—</span>
+                                    <input type="time" name="quarta_fim">
+                                </div>
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Quinta-feira</label>
+                                <div class="horarios-input">
+                                    <input type="time" name="quinta_inicio">
+                                    <span>—</span>
+                                    <input type="time" name="quinta_fim">
+                                </div>
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+
+                        <div class="horario">
+                            <div class="campo">
+                                <label>Sexta-feira</label>
+                                <div class="horarios-input">
+                                    <input type="time" name="sexta_inicio">
+                                    <span>—</span>
+                                    <input type="time" name="sexta_fim">
+                                </div>
+                                <span class="mensagem-erro"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="acoes-formulario">
+                    <a href="./minhasMonitorias.html" class="btn-cancelar">Cancelar</a>
+                    <button type="submit" class="btn-criar">Salvar alterações</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script type="module" src="../js/navbar.js"></script>
+    <script type="module" src="../js/editarMonitoria.js"></script>
+</body>
+</html>
