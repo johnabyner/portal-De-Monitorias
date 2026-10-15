@@ -23,9 +23,9 @@ import { FavoritesModule } from './favorites/favorites.module';
       url: process.env.DATABASE_URL,
       autoLoadEntities:true,
       synchronize:true,
-      ssl:{
-        rejectUnauthorized: false,
-      },
+      // ssl:{
+      //   rejectUnauthorized: false,
+      // },
     }),
 
     FavoritesModule,

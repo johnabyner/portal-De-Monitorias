@@ -40,7 +40,7 @@ async function bootstrap() {
     const documentFactory = () => SwaggerModule.createDocument(app,config);
     SwaggerModule.setup('api', app, documentFactory);
 
-    await app.listen(process.env.PORT ?? 7777);
+    await app.listen(process.env.BACKEND_PORT ?? 7777);
   }catch(err){
     console.error('Erro ao iniciar a aplicação', err)
   }
