@@ -38,27 +38,27 @@ O **Portal de Monitorias** busca solucionar esse problema reunindo essas informa
 
 ##  FOTOS
 
-Página inicial
+### Página inicial
 <img width="1920" height="1080" alt="Home" src="https://github.com/user-attachments/assets/5276f104-b862-42b8-93a4-7a5816842171" />
 
-Consulta de monitorias
+### Consulta de monitorias
 <img width="1920" height="1080" alt="monitorias" src="https://github.com/user-attachments/assets/164b84fa-b339-452b-948f-fd4ddb8287bc" />
 
-Cadastro de usuário
+### Cadastro de usuário
 <img width="1920" height="1080" alt="cadastro" src="https://github.com/user-attachments/assets/9b57e75d-fa74-4813-a737-2224f37e5081" />
 
-Login
+### Login
 <img width="1920" height="1080" alt="login" src="https://github.com/user-attachments/assets/700f4e8f-5e56-4231-991a-abdc9e872354" />
 
-Favoritos
+### Favoritos
 <img width="1920" height="1077" alt="favoritos" src="https://github.com/user-attachments/assets/a266aa92-8e7d-401f-bce5-bf52d4df018a" />
 
-Criar monitoria
+### Criar monitoria
 <img width="1918" height="1074" alt="criar" src="https://github.com/user-attachments/assets/3c0b300e-6a6e-48df-8110-1492530b6c52" />
 <img width="1920" height="1080" alt="criarMonitoria" src="https://github.com/user-attachments/assets/a4e1402f-18b6-49df-9b20-a09e9ca8c05d" />
 <img width="1920" height="1075" alt="criarMonitoria2" src="https://github.com/user-attachments/assets/b011ab0c-7dc9-4aa4-aec9-66f0e62f91ea" />
 
-Minhas monitorias
+### Minhas monitorias
 <img width="1920" height="1079" alt="minhasMonitorias" src="https://github.com/user-attachments/assets/06585f23-be29-472d-b3e8-a0b914de2c07" />
 
 
