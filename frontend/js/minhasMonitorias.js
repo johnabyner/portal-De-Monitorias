@@ -2,8 +2,9 @@ import BuscarMonitorias from "./BuscarMonitorias.js";
 import Auth from "./Auth.js";
 
 const cargo = Auth.verificarCargo()
-if(cargo === "aluno" || cargo === "visitante" || cargo === "administrador"){
-        window.location.href = './monitorias.html';
+if(cargo === "aluno" || cargo === "visitante"){
+    console.log(cargo)
+    window.location.href = './monitorias.html';
     throw new Error('Acesso não autorizado.');
 }
 

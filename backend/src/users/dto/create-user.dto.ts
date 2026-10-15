@@ -10,7 +10,7 @@ export class CreateUserDto {
     })
     @IsString()
     @IsNotEmpty()
-    @Transform(({ value }) => typeof value ? String(value).trim()) //transforma em string e tira os espaços
+    @Transform(({ value }) => typeof value === 'string' ?  String(value).trim() : value) //transforma em string e tira os espaços
     readonly matricula!: string;
 
     @ApiProperty({
@@ -27,7 +27,7 @@ export class CreateUserDto {
     })
     @IsEmail()
     @IsNotEmpty()
-    @Transform(({ value }) => typeof value ? value.trim())
+    @Transform(({ value }) => typeof value === 'string' ? value.trim() : value)
     readonly email!: string;
 
     @ApiProperty({
@@ -37,7 +37,7 @@ export class CreateUserDto {
     })
     @IsEnum(Sexo)
     @IsNotEmpty()
-    @Transform(({ value }) => typeof value ? value.trim().toLowerCase())
+    @Transform(({ value }) => typeof value === 'string' ? value.trim().toLowerCase() : value)
     readonly sexo!: Sexo;
 
     @ApiProperty({
